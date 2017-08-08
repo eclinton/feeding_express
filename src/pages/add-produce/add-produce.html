@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add Produce</ion-title>
+    <ion-icon id="repeat" name="repeat"></ion-icon>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating autocorrect="on" autocomplete="on">Product Description</ion-label>
+    <ion-input type="text" [(ngModel)]="item.title"   ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Cost per lb</ion-label>
+    <ion-input type="number" [(ngModel)]="item.costPerLb"  ></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-select [(ngModel)]="item.storage" >
+      <ion-option value="pkg"  selected="true">Pkg</ion-option>
+      <ion-option value="bin">Bin</ion-option>
+      <ion-option value="bag">Bag</ion-option>
+      <ion-option value="sack">Sack</ion-option>
+    </ion-select>
+   </ion-item>
+
+  <ion-item>
+    <ion-label floating>Location</ion-label>
+    <ion-input type="text" [(ngModel)]="item.location"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-select [(ngModel)]="item.transport">
+      <ion-option value="truck"  selected="true">Truck</ion-option>
+      <ion-option value="pallet">Pallet</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Load offered</ion-label>
+    <ion-input type="number" [(ngModel)]="item.loadOffered"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Estimated Load Cost</ion-label>
+    <ion-input type="number" [(ngModel)]="item.estimatedLoadCost"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Vendor Name</ion-label>
+    <ion-input type="text" [(ngModel)]="item.vendorName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Days</ion-label>
+    <ion-input type="number" [(ngModel)]="item.days"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Combo</ion-label>
+    <ion-input type="number" [(ngModel)]="item.combo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Comments</ion-label>
+    <ion-input type="text"[(ngModel)] = "item.comments"></ion-input>
+  </ion-item>
+
+  <div style="text-align: right">
+    <button ion-button icon-only color="dark" clear (click)="save()">
+      <ion-icon name="arrow-dropright-circle"></ion-icon>
+    </button>
+  </div>
+</ion-content>

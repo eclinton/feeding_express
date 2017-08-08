@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>New Message</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label floating>To</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Select All</ion-label>
+    <ion-checkbox color="dark" checked="true"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Subject</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Product list updated</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <div style="text-align: right">
+  <button ion-button icon-only color="dark" clear (click)="sendMessage()">
+    <ion-icon name="arrow-dropright-circle"></ion-icon>
+  </button>
+</div>
+</ion-content>
