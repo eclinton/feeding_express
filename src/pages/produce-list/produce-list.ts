@@ -73,13 +73,19 @@ export class ProduceList {
 */
   }
 
-  public removeTask(slidingItem: ItemSliding, task: any)
+  public removeTask(slidingItem: ItemSliding, item: any)
   {
 
-    this.products.remove(task.$key);
+    this.products.remove(item.$key);
 
     slidingItem.close();
 
+ }
+
+ public editTask(slidingItem: ItemSliding, item: any)
+ {
+   slidingItem.close();
+   this.navCtrl.push(AddProducePage,item)
  }
 
 }

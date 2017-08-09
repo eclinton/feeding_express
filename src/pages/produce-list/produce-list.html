@@ -4,8 +4,10 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Produce List</ion-title>
+    <!-- TODO move these to the menu
     <ion-icon id="notification" name="notifications"></ion-icon>
     <ion-icon id="send-notification" name="send" (click)="sendNotification()"></ion-icon>
+    -->
   </ion-navbar>
 </ion-header>
 
@@ -58,7 +60,7 @@
 
 
       <ion-item-options side="right" (ionSwipe)="removeTask(slidingItem, product)">
-        <button ion-button icon-only (click)="removeTask(slidingItem,product)" color="secondary">
+        <button ion-button icon-only (click)="editTask(slidingItem,product)" color="secondary">
           <ion-icon name="create"></ion-icon>
           </button>
         <button ion-button icon-only expandable (click)="removeTask(slidingItem,product)" color="danger">
