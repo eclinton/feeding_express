@@ -22,7 +22,7 @@ export class AddProducePage {
   constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public navParams: NavParams) {
     this.products = af_db.list('/products');
     console.log("just checking!");
-    if (navParams.get("title")) {
+    if (navParams.get("$key")) {
       console.log("modify case");
       this.item = navParams.data;
       this.modify = true;

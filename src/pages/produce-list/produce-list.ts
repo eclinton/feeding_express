@@ -4,6 +4,7 @@ import { AlertController } from 'ionic-angular';
 import { ItemSliding } from 'ionic-angular';
 
 import { AddProducePage } from '../add-produce/add-produce';
+import {OrderProducePage} from '../order-produce/order-produce';
 import { AddSendNotification } from '../new-message/new-message';
 import { Produce } from './produce';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -29,17 +30,16 @@ export class ProduceList {
       { title: 'Pineapple', count: 0, icon: 'https://png.icons8.com/pineapple/color/48', price: "$0.060/lb", storage: "Bag" }
       */
     ]
-    for (let i = 0; i < p.length; i++)
-    {
+    for (let i = 0; i < p.length; i++) {
       this.products.push(p[i]);
 
     }
   }
-/*
-  addProduce(): void {
-    this.navCtrl.push(AddProducePage);
-  }
-  */
+  /*
+    addProduce(): void {
+      this.navCtrl.push(AddProducePage);
+    }
+    */
 
   sendNotification(): void {
     this.navCtrl.push(AddSendNotification);
@@ -73,19 +73,23 @@ export class ProduceList {
 */
   }
 
-  public removeTask(slidingItem: ItemSliding, item: any)
-  {
+  public removeItem(slidingItem: ItemSliding, item: any) {
 
     this.products.remove(item.$key);
 
     slidingItem.close();
 
- }
+  }
 
- public editTask(slidingItem: ItemSliding, item: any)
- {
-   slidingItem.close();
-   this.navCtrl.push(AddProducePage,item)
- }
+  public editItem(slidingItem: ItemSliding, item: any) {
+    slidingItem.close();
+    this.navCtrl.push(AddProducePage, item)
+  }
+
+  public orderItem(item: any)
+  {
+    this.navCtrl.push(OrderProducePage,item);
+
+  }
 
 }

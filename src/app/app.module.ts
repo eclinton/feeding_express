@@ -14,6 +14,8 @@ import { AddressBook } from '../pages/address-book/address-book';
 import { AddSendNotification } from '../pages/new-message/new-message';
 import { SuccessPage } from '../pages/message-success/message-success';
 import { ProduceAvailableList} from '../pages/produce-available-list/produce-available-list';
+import {OrderProducePage} from '../pages/order-produce/order-produce';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -45,7 +47,8 @@ export const firebaseConfig = {
     SuccessPage,
     ProduceAvailableList,
     AddressBook,
-    TimeAgoPipe
+    TimeAgoPipe,
+    OrderProducePage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,9 @@ export const firebaseConfig = {
     AddSendNotification,
     ProduceAvailableList,
     SuccessPage,
-    AddressBook
+    AddressBook,
+    OrderProducePage
+    
   ],
   providers: [
     StatusBar,

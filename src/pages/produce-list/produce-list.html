@@ -28,7 +28,7 @@
     <ion-item-sliding #slidingItem *ngFor="let product of products | async">
       <ion-item text-wrap>
 
-        <ion-item>
+        <ion-item no-lines>
 
           <ion-avatar item-start>
             <img src="{{product.icon}}">
@@ -42,17 +42,18 @@
  
 
           <!--ion-badge item-end-->
-            <button ion-button color="secondary" outline round item-end>
-              <ion-item>
+            <button ion-button round color="secondary" (click)="orderItem(product)"  item-end>
+              <!--ion-item-->
             {{product.costPerLb}}$/lb
               <ion-icon name="cart" small></ion-icon>
-              </ion-item>
+              <!--/ion-item-->
             </button>
           <!--/ion-badge-->
         </ion-item>
 
-        <ion-row>
-          <ion-col>
+        <!--ion-item no-lines>
+        <ion-row no-lines>
+          <ion-col no-lines>
             <ion-badge>
               <ion-icon name="basket" small></ion-icon>
               12 pallets available </ion-badge>
@@ -63,17 +64,26 @@
             </ion-note>
           </ion-col>
         </ion-row>
+        </ion-item-->
+        <ion-item no-lines>
+            <ion-badge>
+              <ion-icon name="basket" small></ion-icon>
+              {{product.loadOffered}} pallets available </ion-badge>
+            <ion-note item-end small>
+              {{ product.date | timeAgo}}
+            </ion-note>
+        </ion-item>
 
 
       </ion-item>
 
 
 
-      <ion-item-options side="right" (ionSwipe)="removeTask(slidingItem, product)">
-        <button ion-button icon-only (click)="editTask(slidingItem,product)" color="secondary">
+      <ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, product)">
+        <button ion-button icon-only (click)="editItem(slidingItem,product)" color="secondary">
           <ion-icon name="create"></ion-icon>
           </button>
-        <button ion-button icon-only expandable (click)="removeTask(slidingItem,product)" color="danger">
+        <button ion-button icon-only expandable (click)="removeItem(slidingItem,product)" color="danger">
           <ion-icon name="trash"></ion-icon>
           </button>
       </ion-item-options>

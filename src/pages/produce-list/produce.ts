@@ -3,7 +3,7 @@ export interface Produce {
   icon: string;
   count: number;
   title : string;
- // price : string;
+  palletsOrderedCnt: number;
   storage: string;
   transport: string;
   date: number;
