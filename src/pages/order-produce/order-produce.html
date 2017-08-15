@@ -1,0 +1,119 @@
+<!--
+  Generated template for the OrderProducePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Order Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="outer-content">
+
+  <ion-list>
+    <ion-list-header>
+      Space in current truck
+      <ion-badge item-end>21 pallets</ion-badge>
+    </ion-list-header>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Pallets to order
+      <ion-badge item-end>{{item.palletsOrderedCnt}}</ion-badge>
+    </ion-list-header>
+    <ion-item>
+      <ion-range min="0" max="21" step="1" [(ngModel)]="item.palletsOrderedCnt">
+        <ion-icon range-left>0</ion-icon>
+        <ion-icon range-right>21</ion-icon>
+      </ion-range>
+    </ion-item>
+  </ion-list>
+
+  <ion-card>
+    <ion-segment [(ngModel)]="Tab">
+      <ion-segment-button value="Details">
+        Details
+      </ion-segment-button>
+      <ion-segment-button value="Comments">
+        Comments
+      </ion-segment-button>
+
+    </ion-segment>
+    <ion-item text-wrap *ngIf="Tab === 'Comments'">
+      {{item.comments}}
+    </ion-item>
+    <ion-item *ngIf="Tab === 'Details'">
+      <ion-list>
+        <ion-list-header>
+          <ion-avatar item-start small>
+            <img src="{{item.icon}}">
+          </ion-avatar>
+          {{item.title}}
+        </ion-list-header>
+        <ion-item>
+          Estimated Load Cost:
+          <ion-badge item-end>{{item.estimatedLoadCost}}$</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Location:
+          <ion-badge item-end>{{item.location}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Truckloads Offered: 
+          <ion-badge item-end>1/day</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Vendor Name:
+          <ion-badge item-end>{{item.vendorName}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Estimated Shelf Life:
+          <ion-badge item-end>6-8 days</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Product cost:
+          <ion-badge item-end>{{item.costPerLb}}$/lb</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Storage:
+          <ion-badge item-end>{{item.storage}}</ion-badge>
+        </ion-item>
+
+
+        <ion-item>
+          Transport:
+          <ion-badge item-end>{{item.transport}}</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-item>
+    <ion-list>
+
+      <!--ion-item *ngFor="let item of getItems(Tab)">
+        
+
+      </ion-item-->
+    </ion-list>
+    <button ion-button full color="secondary">Pre-order</button>
+  </ion-card>
+
+
+
+</ion-content>
+
+<style>
+  ion-list+ion-list {
+    margin-top: 0;
+  }
+</style>
