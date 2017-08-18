@@ -8,5 +8,88 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let order of orders | async">
+      <ion-item text-wrap>
+
+        <ion-item no-lines>
+
+          
+
+          <ion-list-header>
+            <ion-avatar item-start>
+            <img src="{{order.icon}}">
+          </ion-avatar>
+            {{order.title}}
+          </ion-list-header>
+         
+          <ion-item>
+            Vendor :
+
+            <h2 ion-text color="dark" item-end>
+              {{order.vendorName}}
+
+            </h2>
+           
+
+          </ion-item>
+          <ion-item text-wrap>
+            Food Bank :
+
+            <h2 ion-text color="dark" item-end>
+              {{order.location}}
+
+            </h2>
+           
+
+          </ion-item>
+           <ion-item>
+            Delivery Date :
+
+            <h2 ion-text color="dark" item-end>
+              N/A
+
+            </h2>
+           
+
+          </ion-item>
+            <ion-item>
+            Quantity :
+
+            <h2 ion-text color="dark" item-end>
+              {{order.palletsOrderedCnt}}
+
+            </h2>
+           
+
+          </ion-item>
+
+        </ion-item>
+
+
+        <ion-item no-lines>
+
+          <ion-note item-end small>
+            {{ order.date | timeAgo}}
+          </ion-note>
+        </ion-item>
+
+
+      </ion-item>
+
+
+
+      <ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, order)">
+        <button ion-button icon-only expandable (click)="removeItem(slidingItem,order)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+          </button>
+      </ion-item-options>
+
+
+
+
+
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>
