@@ -5,7 +5,7 @@ import { LoginPage } from '../login/login';
 import { ProduceList } from '../produce-list/produce-list';
 
 import { AngularFireAuth } from "angularfire2/auth"
-import { User } from "../../models/user";
+import { User } from "../../models/user/user";
 import { AlertController } from 'ionic-angular';
 
 @Component({

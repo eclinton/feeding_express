@@ -2,20 +2,21 @@
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-           <ion-icon name="notifications"> </ion-icon>
-
-     
     </button>
+    <button ion-button clear (click)="goInbox()">
+      <ion-icon name="notifications"></ion-icon>
+    </button>
+
+
     <ion-title>Produce List</ion-title>
     <!-- TODO move these to the menu
     <ion-icon id="notification" name="notifications"></ion-icon>
     <ion-icon id="send-notification" name="send" (click)="sendNotification()"></ion-icon>
-    -->
-  </ion-navbar>
+  -->
+</ion-navbar>
 </ion-header>
 
 <ion-content fullscreen>
-
   <ion-searchbar showCancelButton color="danger" (ionInput)="getItems($event)"></ion-searchbar>
   <!--ion-list>
     <ion-item *ngFor="let item of items">
@@ -26,16 +27,14 @@
   <div>
   </div>
   <ion-fab right bottom *ngIf="user.domain == '@feedingexpress.com'">
-    <button ion-fab icon-only block (click)="addProduce()">
-    <ion-icon name="add"></ion-icon>
-  </button>
+    <button ion-button icon-only block (click)="addProduce()">
+      <ion-icon name="add"></ion-icon>Add Item
+    </button>
   </ion-fab>
   <ion-list>
     <ion-item-sliding #slidingItem *ngFor="let product of products | async">
       <ion-item text-wrap>
-
         <ion-item no-lines>
-
           <ion-avatar item-start>
             <img src="{{product.icon}}" width="60" height="60">
           </ion-avatar>
@@ -52,58 +51,34 @@
 
           <!--ion-badge item-end-->
           <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain == '@foodbank.com'" item-end>
-              <!--ion-item-->
-            {{product.costPerLb}}$/lb
-              <ion-icon name="cart" small></ion-icon>
-              <!--/ion-item-->
-            </button>
+            <!--ion-item-->
+            ${{product.costPerLb}}/lb
+            <ion-icon name="cart" small></ion-icon>
+            <!--/ion-item-->
+          </button>
           <!--/ion-badge-->
         </ion-item>
 
-        <!--ion-item no-lines>
-        <ion-row no-lines>
-          <ion-col no-lines>
-            <ion-badge>
-              <ion-icon name="basket" small></ion-icon>
-              12 pallets available </ion-badge>
-          </ion-col>
-          <ion-col text-end>
-            <ion-note item-end small>
-              {{ product.date | timeAgo}}
-            </ion-note>
-          </ion-col>
-        </ion-row>
-        </ion-item-->
         <ion-item no-lines>
           <ion-badge>
             <ion-icon name="basket" small></ion-icon>
-            {{product.loadOffered}} pallets available
+            {{product.loadOffered}} pallets
           </ion-badge>
           <ion-note item-end small>
             {{ product.date | timeAgo}}
           </ion-note>
         </ion-item>
-
-
       </ion-item>
 
-
-
-      <ion-item-options side="right" *ngIf="user.domain == '@feedingexpress.com'" (ionSwipe)="removeItem(slidingItem, product)">
-        <button ion-button icon-only (click)="editItem(slidingItem,product)" color="secondary">
-          <ion-icon name="create"></ion-icon>
+        <ion-item-options side="right" *ngIf="user.domain == '@feedingexpress.com'" (ionSwipe)="removeItem(slidingItem, product)">
+          <button ion-button icon-only (click)="editItem(slidingItem,product)" color="secondary">
+            <ion-icon name="create"></ion-icon>
           </button>
-        <button ion-button icon-only expandable (click)="removeItem(slidingItem,product)" color="danger">
-          <ion-icon name="trash"></ion-icon>
+          <button ion-button icon-only expandable (click)="removeItem(slidingItem,product)" color="danger">
+            <ion-icon name="trash"></ion-icon>
           </button>
-      </ion-item-options>
-
-
-
-
-
+        </ion-item-options>
+      </ion-item>
     </ion-item-sliding>
   </ion-list>
-
-
 </ion-content>

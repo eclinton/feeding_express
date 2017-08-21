@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Produce } from '../produce-list/produce';
+import { Produce } from '../../models/produce/produce';
 import {ConfirmOrderPage} from '../confirm-order/confirm-order';
 
 /**

@@ -3,7 +3,7 @@ import { App, NavController } from 'ionic-angular';
 
 import { SignUpPage } from '../signup/signup';
 import { ProduceList } from '../produce-list/produce-list';
-import { User } from "../../models/user";
+import { User } from "../../models/user/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import {AuthenticationService} from '../../services/AuthenticationService';
