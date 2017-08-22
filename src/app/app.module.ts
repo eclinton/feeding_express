@@ -25,6 +25,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { TimeAgoPipe } from '../timeago/timeAgo';
 
+import { HttpModule} from '@angular/http';
+//import { Headers} from '@angular/http';
+
+
 export const firebaseConfig = {
     apiKey: "AIzaSyDOWbbKmCoVhTLElkpzrjW4q-KEpnbHT2c",
     authDomain: "feedingexpress-af9ec.firebaseapp.com",
@@ -57,7 +61,9 @@ export const firebaseConfig = {
     IonicModule.forRoot(FeedingExpress),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpModule//,
+   // Headers
   ],
   bootstrap: [IonicApp],
   entryComponents: [
