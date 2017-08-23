@@ -23,10 +23,11 @@
   </ion-list>
   <div>
   </div>
-
-  <button ion-button icon-only block (click)="addProduce()">
-    <ion-icon name="add" small>Add Item</ion-icon>
+  <ion-fab right bottom>
+    <button ion-fab icon-only block (click)="addProduce()">
+    <ion-icon name="add"></ion-icon>
   </button>
+  </ion-fab>
   <ion-list>
     <ion-item-sliding #slidingItem *ngFor="let product of products | async">
       <ion-item text-wrap>
@@ -42,10 +43,10 @@
           {{product.title}}
           <!--/ion-item-->
           <!--/button-->
- 
+
 
           <!--ion-badge item-end-->
-            <button ion-button round color="secondary" (click)="orderItem(product)"  item-end>
+          <button ion-button round color="secondary" (click)="orderItem(product)" item-end>
               <!--ion-item-->
             {{product.costPerLb}}$/lb
               <ion-icon name="cart" small></ion-icon>
@@ -69,13 +70,13 @@
         </ion-row>
         </ion-item-->
         <ion-item no-lines>
-            <ion-badge>
-              <ion-icon name="basket" small></ion-icon>
-              {{product.loadOffered}} pallets available 
-            </ion-badge>
-            <ion-note item-end small>
-              {{ product.date | timeAgo}}
-            </ion-note>
+          <ion-badge>
+            <ion-icon name="basket" small></ion-icon>
+            {{product.loadOffered}} pallets available
+          </ion-badge>
+          <ion-note item-end small>
+            {{ product.date | timeAgo}}
+          </ion-note>
         </ion-item>
 
 
