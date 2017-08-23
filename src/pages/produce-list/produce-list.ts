@@ -4,12 +4,15 @@ import { AlertController } from 'ionic-angular';
 import { ItemSliding } from 'ionic-angular';
 
 import { AddProducePage } from '../add-produce/add-produce';
-import {OrderProducePage} from '../order-produce/order-produce';
+import { OrderProducePage } from '../order-produce/order-produce';
 import { AddSendNotification } from '../new-message/new-message';
 import { Produce } from './produce';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { TimeAgoPipe } from '../../timeago/timeAgo';
+import { Http, Response, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 import * as humanize from 'humanize';
+
 
 @Component({
   selector: 'page-produce-list',
@@ -17,9 +20,11 @@ import * as humanize from 'humanize';
 })
 export class ProduceList {
   private products: FirebaseListObservable<any[]>;
-  constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController) {
+
+  constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http) {
     //af_db.database.ref("/products").orderByChild("date");
     this.products = af_db.list('/products');
+    console.log("fooFDSAFASDFASDFASDFASFASDFASDFASDFASDFASDFASDF");
 
 
     let p = [
@@ -34,6 +39,7 @@ export class ProduceList {
       this.products.push(p[i]);
 
     }
+
   }
   /*
     addProduce(): void {
@@ -48,6 +54,9 @@ export class ProduceList {
   public addProduce(): void {
     console.log("debug");
     this.navCtrl.push(AddProducePage);
+    //let item = {} as Produce;
+    
+
     /*
     let theNewFood: string = prompt("New Food");
     if (theNewFood !== '') {
@@ -86,9 +95,8 @@ export class ProduceList {
     this.navCtrl.push(AddProducePage, item)
   }
 
-  public orderItem(item: any)
-  {
-    this.navCtrl.push(OrderProducePage,item);
+  public orderItem(item: any) {
+    this.navCtrl.push(OrderProducePage, item);
 
   }
 
