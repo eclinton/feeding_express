@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MESSAGE_LIST } from '../../mocks/messages/messages'
 import { BroadcastMessage } from '../../models/broadcast-messages/broadcast-message.interface'
 import { Message } from '../../models/messages/message'
 
@@ -17,8 +16,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
   templateUrl: 'new-broadcast-message.html',
 })
 export class NewBroadcastMessagePage {
-
-  messageList = MESSAGE_LIST;
   broadcastMessages: FirebaseListObservable<Message[]>;
 
   @Output() sendMessage: EventEmitter<string>

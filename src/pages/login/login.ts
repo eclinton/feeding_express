@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { App, NavController } from 'ionic-angular';
+import { App, NavController, ToastController } from 'ionic-angular';
 
 import { SignUpPage } from '../signup/signup';
 import { ProduceList } from '../produce-list/produce-list';
+import { ProduceAvailableList } from '../produce-available-list/produce-available-list';
 import { User } from "../../models/user/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
@@ -30,7 +31,6 @@ export class LoginPage {
         });
       alert.present();
       return;
-
     }
     var self = this;
     this.authService.setDomain(this.user.domain);
@@ -39,27 +39,18 @@ export class LoginPage {
       self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
     }, function(error) {
 
-      // this.error = true;
       var errorCode = error.name;
       var errorMessage = error.message;
 
-      console.log(errorCode);
-      console.log(errorMessage);
-      if (errorMessage)
-      {
+      if (errorMessage) {
         let alert = self.alertCtrl.create({
           title: 'Error',
           subTitle: errorMessage,
           buttons: ['OK']
         });
         alert.present();
-
-
       }
     });
-
-
-
   }
 
   forgotPassword() {}
