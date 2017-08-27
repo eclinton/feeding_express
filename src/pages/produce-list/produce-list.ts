@@ -20,10 +20,13 @@ import * as humanize from 'humanize';
 })
 export class ProduceList {
   private products: FirebaseListObservable<any[]>;
+  private productRef;
+  private searchItems: any[] = [];
 
   constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http) {
     //af_db.database.ref("/products").orderByChild("date");
     this.products = af_db.list('/products');
+    this.productRef = af_db.database.ref('/products');
     console.log("fooFDSAFASDFASDFASDFASFASDFASDFASDFASDFASDFASDF");
 
 
@@ -55,7 +58,7 @@ export class ProduceList {
     console.log("debug");
     this.navCtrl.push(AddProducePage);
     //let item = {} as Produce;
-    
+
 
     /*
     let theNewFood: string = prompt("New Food");
@@ -99,5 +102,38 @@ export class ProduceList {
     this.navCtrl.push(OrderProducePage, item);
 
   }
+
+  public getItems(ev: any) {
+    let val = ev.srcElement.value;
+    console.log("check");
+    console.log(ev.srcElement.value);
+    if (val && val.trim() !== '') {
+      this.products = this.af_db.list('/products',
+        {
+          query: {
+            orderByChild: 'title',
+            startAt: val
+          }
+        }
+
+      );
+
+
+
+    }
+    else {
+      this.products = this.af_db.list('/products');
+
+    }
+
+
+
+
+
+
+  }
+
+
+
 
 }
