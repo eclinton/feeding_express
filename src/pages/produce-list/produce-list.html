@@ -15,8 +15,8 @@
 </ion-header>
 
 <ion-content fullscreen>
-  
-  <ion-searchbar placeholder="Filer" showCancelButton color="danger" (ionInput)="getItems($event)"></ion-searchbar>
+
+  <ion-searchbar showCancelButton color="danger" (ionInput)="getItems($event)"></ion-searchbar>
   <!--ion-list>
     <ion-item *ngFor="let item of items">
       {{ item }}
@@ -25,7 +25,7 @@
   <p padding-left padding-right> </p>
   <div>
   </div>
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="user.domain == '@feedingexpress.com'">
     <button ion-fab icon-only block (click)="addProduce()">
     <ion-icon name="add"></ion-icon>
   </button>
@@ -48,7 +48,7 @@
 
 
           <!--ion-badge item-end-->
-          <button ion-button round color="secondary" (click)="orderItem(product)" item-end>
+          <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain == '@foodbank.com'" item-end>
               <!--ion-item-->
             {{product.costPerLb}}$/lb
               <ion-icon name="cart" small></ion-icon>
@@ -86,7 +86,7 @@
 
 
 
-      <ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, product)">
+      <ion-item-options side="right" *ngIf="user.domain == '@feedingexpress.com'" (ionSwipe)="removeItem(slidingItem, product)">
         <button ion-button icon-only (click)="editItem(slidingItem,product)" color="secondary">
           <ion-icon name="create"></ion-icon>
           </button>

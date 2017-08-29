@@ -5,6 +5,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AlertController } from 'ionic-angular';
 import * as humanize from 'humanize';
 import { ProduceList } from '../produce-list/produce-list';
+import {DeliveryDateAddressPage} from '../delivery-date-address/delivery-date-address';
 
 
 /**
@@ -20,11 +21,11 @@ import { ProduceList } from '../produce-list/produce-list';
 })
 export class ConfirmOrderPage {
   item = {} as Produce;
-  private orders: FirebaseListObservable<any[]>;
+  //private orders: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController) {
     this.item = navParams.data;
-    this.orders = af_db.list('/orders');
+    //this.orders = af_db.list('/orders');
 
   }
 
@@ -33,13 +34,17 @@ export class ConfirmOrderPage {
   }
 
   save() {
+    
     let self = this;
+    self.navCtrl.push(DeliveryDateAddressPage, self.item);
+    /*
     this.item.date = humanize.time();
 
 
     this.orders.push(this.item).then(
       function (resolve) {
-        self.navCtrl.popToRoot();
+        //self.navCtrl.popToRoot();
+        self.navCtrl.push(DeliveryDateAddressPage, self.item);
       }
 
       ,
@@ -56,6 +61,7 @@ export class ConfirmOrderPage {
 
       }
     );
+    */
 
 
   }

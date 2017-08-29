@@ -16,6 +16,7 @@ import { SuccessPage } from '../pages/message-success/message-success';
 import { ProduceAvailableList} from '../pages/produce-available-list/produce-available-list';
 import {OrderProducePage} from '../pages/order-produce/order-produce';
 import {ConfirmOrderPage} from '../pages/confirm-order/confirm-order';
+import {DeliveryDateAddressPage} from '../pages/delivery-date-address/delivery-date-address';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -54,7 +55,8 @@ export const firebaseConfig = {
     AddressBook,
     TimeAgoPipe,
     OrderProducePage,
-    ConfirmOrderPage
+    ConfirmOrderPage,
+    DeliveryDateAddressPage
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ export const firebaseConfig = {
     SuccessPage,
     AddressBook,
     OrderProducePage,
-    ConfirmOrderPage
+    ConfirmOrderPage,
+    DeliveryDateAddressPage
     
   ],
   providers: [

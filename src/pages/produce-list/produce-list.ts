@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { ItemSliding } from 'ionic-angular';
 
@@ -12,6 +12,7 @@ import { TimeAgoPipe } from '../../timeago/timeAgo';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as humanize from 'humanize';
+import { User } from "../../models/user";
 
 
 @Component({
@@ -21,13 +22,23 @@ import * as humanize from 'humanize';
 export class ProduceList {
   private products: FirebaseListObservable<any[]>;
   private productRef;
-  private searchItems: any[] = [];
+  private user = {} as User;
+  //private searchItems: any[] = [];
 
-  constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http) {
     //af_db.database.ref("/products").orderByChild("date");
     this.products = af_db.list('/products');
     this.productRef = af_db.database.ref('/products');
-    console.log("fooFDSAFASDFASDFASDFASFASDFASDFASDFASDFASDFASDF");
+    let foo = this.navParams.get("domain");
+    if (foo) {
+      this.user = navParams.data;
+    }
+    if (this.user.domain == "@feedingexpress.com") {
+      console.log("feedingexpress login!");
+    }
+    if (this.user.domain == "@foodbank.com") {
+      console.log("foodbank login!");
+    }
 
 
     let p = [

@@ -23,7 +23,7 @@ export class FeedingExpress {
 
     this.pages = [
       { title: 'Produce List', component: ProduceList },
-      { title: 'Received Orders', component: ReceivedOrders },
+      { title: 'Orders History', component: ReceivedOrders },
       { title: 'Address Book', component: AddressBook }
     ];
   }

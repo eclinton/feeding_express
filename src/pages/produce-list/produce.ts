@@ -15,4 +15,9 @@ export interface Produce {
   days: number;
   combo: number;
   comments: string;
+  deliveryDate: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string; 
 }

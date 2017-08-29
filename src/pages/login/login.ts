@@ -18,7 +18,9 @@ export class LoginPage {
   constructor(private afAuth: AngularFireAuth, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController) {}
 
   signIn() {
-    if (!this.user.email || !this.user.password)
+    this.user.email = this.user.username + this.user.domain;
+    console.log(this.user.email);
+    if (!this.user.email || !this.user.password || !this.user.domain)
     {
       let alert = this.alertCtrl.create({
           title: 'Error',
@@ -32,7 +34,7 @@ export class LoginPage {
     var self = this;
     this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function(onResolve) {
       console.log("onResolve.");
-      self.appCtrl.getRootNav().setRoot(ProduceList);
+      self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
     }, function(error) {
 
       // this.error = true;

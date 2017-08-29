@@ -14,6 +14,7 @@ export class ReceivedOrders {
   private orders: FirebaseListObservable<any[]>;
   constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController) {
     this.orders = af_db.list('/orders');
+  
 
 
   }
