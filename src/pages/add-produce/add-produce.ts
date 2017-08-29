@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Produce } from '../produce-list/produce';
+import { Produce } from '../../models/produce/produce';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AlertController } from 'ionic-angular';
 import { Http, Response, Headers } from '@angular/http';
@@ -15,11 +15,8 @@ import { ProduceList } from '../produce-list/produce-list';
 })
 export class AddProducePage {
   item = {} as Produce;
-  private products: FirebaseListObservable<any[]>;
+  private products: FirebaseListObservable<Produce[]>;
   private modify: boolean = false;
-
-
-
 
   constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.products = af_db.list('/products');
@@ -30,9 +27,6 @@ export class AddProducePage {
       this.item = navParams.data;
       this.modify = true;
     }
-
-
-
   }
 
   push() {
@@ -60,9 +54,7 @@ export class AddProducePage {
 
         toast.present(toast);
         self.navCtrl.pop();
-      }
-
-      ,
+      },
       function (error) {
         let alert = self.alertCtrl.create({
           title: 'Error',
@@ -70,13 +62,9 @@ export class AddProducePage {
           buttons: ['OK']
         });
 
-
         alert.present();
-
       }
     );
-
-
   }
 
   toTitleCase(str : string){
@@ -92,7 +80,6 @@ export class AddProducePage {
       this.item.date = humanize.time();
       this.item.estimatedLoadCost = 0;
 
-
       if (this.modify == false) {
         let h: Headers = new Headers();
         h.append('Accept', 'application/json');
@@ -107,7 +94,7 @@ export class AddProducePage {
           .map(res => res.json())
           .subscribe(
           response => {
-            console.log("good"); //console.dir(JSON.stringify(response)); 
+            console.log("good"); //console.dir(JSON.stringify(response));
             console.log("test " + response.images[0].display_sizes[0].uri + " ");
             this.item.icon = response.images[0].display_sizes[0].uri; //this could fail...
             this.push();
@@ -116,34 +103,22 @@ export class AddProducePage {
           },
           (error) => {console.log("bad", error);
           loading.dismiss();
-        
-          });
-
-
-      }
-      else {
+        });
+      } else {
         this.products.update(this.item.$key, this.item).then(
           function (resolve) {
             self.navCtrl.pop();
-          }
-
-          ,
+          },
           function (error) {
             let alert = self.alertCtrl.create({
               title: 'Error',
               subTitle: error.message,
               buttons: ['OK']
             });
-
-
             alert.present();
-
           }
         );
-
-
       }
-
     }
   }
 }

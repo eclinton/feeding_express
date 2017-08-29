@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Produce } from '../produce-list/produce';
+import { Produce } from '../../models/produce/produce';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AlertController } from 'ionic-angular';
 import * as humanize from 'humanize';
@@ -57,7 +57,7 @@ export class ConfirmOrderPage {
 
 
         alert.present();
-        
+
 
       }
     );

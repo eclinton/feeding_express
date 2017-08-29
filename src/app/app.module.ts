@@ -17,7 +17,8 @@ import { ProduceAvailableList} from '../pages/produce-available-list/produce-ava
 import {OrderProducePage} from '../pages/order-produce/order-produce';
 import {ConfirmOrderPage} from '../pages/confirm-order/confirm-order';
 import {DeliveryDateAddressPage} from '../pages/delivery-date-address/delivery-date-address';
-
+import {InboxPage} from '../pages/inbox/inbox';
+import {NewBroadcastMessagePage} from '../pages/new-broadcast-message/new-broadcast-message';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +28,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { TimeAgoPipe } from '../timeago/timeAgo';
 import {AuthenticationService} from '../services/AuthenticationService'
 import { LogoutPage } from '../pages/logout/logout';
-
+import { MessageService } from '../providers/message.service';
+import { BroadcastMessageListComponent } from '../components/broadcast-message-list/broadcast-message-list';
 
 import { HttpModule} from '@angular/http';
 //import { Headers} from '@angular/http';
@@ -60,7 +62,10 @@ export const firebaseConfig = {
     TimeAgoPipe,
     OrderProducePage,
     ConfirmOrderPage,
-    DeliveryDateAddressPage
+    DeliveryDateAddressPage,
+    InboxPage,
+    BroadcastMessageListComponent,
+    NewBroadcastMessagePage
   ],
   imports: [
     BrowserModule,
@@ -88,14 +93,16 @@ export const firebaseConfig = {
     AddressBook,
     OrderProducePage,
     ConfirmOrderPage,
-    DeliveryDateAddressPage
-    
+    DeliveryDateAddressPage,
+    InboxPage,
+    NewBroadcastMessagePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthenticationService
+    AuthenticationService,
+    MessageService
   ]
 })
 export class AppModule {}
