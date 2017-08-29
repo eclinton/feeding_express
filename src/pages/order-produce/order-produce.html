@@ -57,8 +57,9 @@
           {{item.title}}
         </ion-list-header>
         <ion-item>
-          Estimated Load Cost:
-          <ion-badge item-end>{{item.estimatedLoadCost}}$</ion-badge>
+          Estimated Total Cost:
+          <!--ion-badge item-end>{{item.estimatedLoadCost}}$</ion-badge-->
+          <ion-badge item-end>{{item.palletsOrderedCnt*2000*item.costPerLb}}$</ion-badge>
         </ion-item>
 
         <ion-item>
@@ -87,8 +88,13 @@
         </ion-item>
 
         <ion-item>
-          Storage:
+          Packaging:
           <ion-badge item-end>{{item.storage}}</ion-badge>
+        </ion-item>
+
+        <ion-item>
+          Package Dimensions:
+          <ion-badge item-end>{{item.packageDim}}</ion-badge>
         </ion-item>
 
 

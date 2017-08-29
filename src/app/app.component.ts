@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { ProduceList } from '../pages/produce-list/produce-list';
 import { ReceivedOrders } from '../pages/received-orders/received-orders';
 import { AddressBook } from '../pages/address-book/address-book';
+import { LogoutPage } from '../pages/logout/logout';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -23,8 +25,9 @@ export class FeedingExpress {
 
     this.pages = [
       { title: 'Produce List', component: ProduceList },
-      { title: 'Orders History', component: ReceivedOrders },
-      { title: 'Address Book', component: AddressBook }
+      { title: 'Order History', component: ReceivedOrders },
+      { title: 'Address Book', component: AddressBook },
+      { title: 'Logout', component: LogoutPage }
     ];
   }
 

@@ -45,6 +45,9 @@
           {{product.title}}
           <!--/ion-item-->
           <!--/button-->
+          <ion-badge color="light" item-end *ngIf="product.storage">
+            {{product.storage}}
+          </ion-badge>
 
 
           <!--ion-badge item-end-->

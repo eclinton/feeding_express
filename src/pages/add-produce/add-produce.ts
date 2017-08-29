@@ -5,7 +5,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AlertController } from 'ionic-angular';
 import { Http, Response, Headers } from '@angular/http';
 import * as humanize from 'humanize';
-
+import { ToastController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 import { ProduceList } from '../produce-list/produce-list';
 
 @Component({
@@ -20,7 +21,7 @@ export class AddProducePage {
 
 
 
-  constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public navParams: NavParams, public http: Http, public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     this.products = af_db.list('/products');
     console.log("just checking!");
 
@@ -48,6 +49,16 @@ export class AddProducePage {
 
     this.products.push(this.item).then(
       function (resolve) {
+        let toast = self.toastCtrl.create(
+
+          {
+            message: "New product added",
+            duration: 1000,
+            position: 'bottom'
+          }
+        );
+
+        toast.present(toast);
         self.navCtrl.pop();
       }
 
@@ -68,11 +79,18 @@ export class AddProducePage {
 
   }
 
+  toTitleCase(str : string){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
   save() {
     let theNewFood: string = this.item.title;
     if (theNewFood !== '') {
+      this.item.title = this.toTitleCase(theNewFood);
+
       let self = this;
       this.item.date = humanize.time();
+      this.item.estimatedLoadCost = 0;
 
 
       if (this.modify == false) {
@@ -80,6 +98,10 @@ export class AddProducePage {
         h.append('Accept', 'application/json');
 
         h.append("Api-Key", "68k448hyfp3sh5berxkfa4d4");
+        let loading = this.loadingCtrl.create({
+          content: 'Please wait...'
+        });
+        loading.present();
 
         this.http.get("https://api.gettyimages.com/v3/search/images?phrase=" + theNewFood, { headers: h })
           .map(res => res.json())
@@ -89,9 +111,13 @@ export class AddProducePage {
             console.log("test " + response.images[0].display_sizes[0].uri + " ");
             this.item.icon = response.images[0].display_sizes[0].uri; //this could fail...
             this.push();
+            loading.dismiss();
 
           },
-          (error) => console.log("bad", error));
+          (error) => {console.log("bad", error);
+          loading.dismiss();
+        
+          });
 
 
       }

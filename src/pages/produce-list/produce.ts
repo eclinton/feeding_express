@@ -10,7 +10,7 @@ export interface Produce {
   costPerLb: number;
   location: string;
   loadOffered: number;
-  estimatedLoadCost: string;
+  estimatedLoadCost: number;
   vendorName: string;
   days: number;
   combo: number;
@@ -19,5 +19,6 @@ export interface Produce {
   address: string;
   city: string;
   state: string;
-  zipCode: string; 
+  zipCode: string;
+  packageDim : string; 
 }

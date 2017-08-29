@@ -6,6 +6,7 @@ import { ProduceList } from '../produce-list/produce-list';
 import { User } from "../../models/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
+import {AuthenticationService} from '../../services/AuthenticationService';
 
 @Component({
   selector: 'page-login',
@@ -15,7 +16,7 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private afAuth: AngularFireAuth, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController) {}
+  constructor(private authService: AuthenticationService, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController) {}
 
   signIn() {
     this.user.email = this.user.username + this.user.domain;
@@ -32,7 +33,8 @@ export class LoginPage {
 
     }
     var self = this;
-    this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function(onResolve) {
+    this.authService.setDomain(this.user.domain);
+    this.authService.getAuth().auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function(onResolve) {
       console.log("onResolve.");
       self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
     }, function(error) {

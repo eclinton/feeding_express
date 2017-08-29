@@ -13,6 +13,7 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as humanize from 'humanize';
 import { User } from "../../models/user";
+import {AuthenticationService} from '../../services/AuthenticationService';
 
 
 @Component({
@@ -25,14 +26,16 @@ export class ProduceList {
   private user = {} as User;
   //private searchItems: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http, private authService: AuthenticationService) {
     //af_db.database.ref("/products").orderByChild("date");
     this.products = af_db.list('/products');
     this.productRef = af_db.database.ref('/products');
     let foo = this.navParams.get("domain");
-    if (foo) {
-      this.user = navParams.data;
-    }
+
+    this.user.domain = this.authService.getDomain();
+
+
+    
     if (this.user.domain == "@feedingexpress.com") {
       console.log("feedingexpress login!");
     }
@@ -114,11 +117,16 @@ export class ProduceList {
 
   }
 
+   toTitleCase(str : string){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
   public getItems(ev: any) {
     let val = ev.srcElement.value;
     console.log("check");
     console.log(ev.srcElement.value);
     if (val && val.trim() !== '') {
+      val = this.toTitleCase(val);
       this.products = this.af_db.list('/products',
         {
           query: {

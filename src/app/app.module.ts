@@ -25,6 +25,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { TimeAgoPipe } from '../timeago/timeAgo';
+import {AuthenticationService} from '../services/AuthenticationService'
+import { LogoutPage } from '../pages/logout/logout';
+
 
 import { HttpModule} from '@angular/http';
 //import { Headers} from '@angular/http';
@@ -47,6 +50,7 @@ export const firebaseConfig = {
     LoginPage,
     SignUpPage,
     ProduceList,
+    LogoutPage,
     AddProducePage,
     ReceivedOrders,
     AddSendNotification,
@@ -75,6 +79,7 @@ export const firebaseConfig = {
     LoginPage,
     SignUpPage,
     ProduceList,
+    LogoutPage,
     AddProducePage,
     ReceivedOrders,
     AddSendNotification,
@@ -89,7 +94,8 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthenticationService
   ]
 })
 export class AppModule {}

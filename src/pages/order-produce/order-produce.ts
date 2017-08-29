@@ -34,7 +34,10 @@ export class OrderProducePage {
   }
 
   preOrder(product : Produce){
+    product.estimatedLoadCost = product.palletsOrderedCnt*2000*product.costPerLb;
     this.navCtrl.push(ConfirmOrderPage,product);
   }
+
+  
 
 }
