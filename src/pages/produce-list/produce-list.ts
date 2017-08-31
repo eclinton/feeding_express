@@ -4,15 +4,16 @@ import { AlertController } from 'ionic-angular';
 import { ItemSliding } from 'ionic-angular';
 
 import { AddProducePage } from '../add-produce/add-produce';
-import { OrderProducePage } from '../order-produce/order-produce';
+import { InboxPage } from '../inbox/inbox';
+import {OrderProducePage} from '../order-produce/order-produce';
 import { AddSendNotification } from '../new-message/new-message';
-import { Produce } from './produce';
+import { Produce } from '../../models/produce/produce';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { TimeAgoPipe } from '../../timeago/timeAgo';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as humanize from 'humanize';
-import { User } from "../../models/user";
+import { User } from "../../models/user/user";
 import {AuthenticationService} from '../../services/AuthenticationService';
 
 
@@ -34,15 +35,12 @@ export class ProduceList {
 
     this.user.domain = this.authService.getDomain();
 
-
-    
     if (this.user.domain == "@feedingexpress.com") {
       console.log("feedingexpress login!");
     }
     if (this.user.domain == "@foodbank.com") {
       console.log("foodbank login!");
     }
-
 
     let p = [
       /*
@@ -54,9 +52,7 @@ export class ProduceList {
     ]
     for (let i = 0; i < p.length; i++) {
       this.products.push(p[i]);
-
     }
-
   }
   /*
     addProduce(): void {
@@ -66,6 +62,10 @@ export class ProduceList {
 
   sendNotification(): void {
     this.navCtrl.push(AddSendNotification);
+  }
+
+  public goInbox(): void {
+    this.navCtrl.push(InboxPage);
   }
 
   public addProduce(): void {
@@ -100,11 +100,9 @@ export class ProduceList {
   }
 
   public removeItem(slidingItem: ItemSliding, item: any) {
-
     this.products.remove(item.$key);
 
     slidingItem.close();
-
   }
 
   public editItem(slidingItem: ItemSliding, item: any) {
@@ -114,10 +112,9 @@ export class ProduceList {
 
   public orderItem(item: any) {
     this.navCtrl.push(OrderProducePage, item);
-
   }
 
-   toTitleCase(str : string){
+  toTitleCase(str : string){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
 
@@ -134,25 +131,10 @@ export class ProduceList {
             startAt: val
           }
         }
-
       );
-
-
-
     }
     else {
       this.products = this.af_db.list('/products');
-
     }
-
-
-
-
-
-
   }
-
-
-
-
 }

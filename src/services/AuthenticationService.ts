@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { User } from "../models/user";
+import { User } from "../models/user/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class AuthenticationService {
   {
 
   }
-  
+
 
   getDomain():string {
     return this.domain;
