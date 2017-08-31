@@ -1,7 +1,7 @@
 export interface Produce {
   $key: any;
   icon: string;
-  count: number;
+  //count: number;
   title : string;
   palletsOrderedCnt: number;
   storage: string;

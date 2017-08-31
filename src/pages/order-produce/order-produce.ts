@@ -38,6 +38,14 @@ export class OrderProducePage {
     this.navCtrl.push(ConfirmOrderPage,product);
   }
 
+  min(a : number, b:number)
+  {
+    if(a < b)
+      return a ;
+    else
+      return b;
+  }
+
   
 
 }

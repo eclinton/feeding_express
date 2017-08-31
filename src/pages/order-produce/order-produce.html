@@ -28,9 +28,9 @@
       <ion-badge item-end>{{item.palletsOrderedCnt}}</ion-badge>
     </ion-list-header>
     <ion-item>
-      <ion-range min="0" max="21" step="1" [(ngModel)]="item.palletsOrderedCnt">
+      <ion-range min="0" max={{this.min(21,item.loadOffered)}} step="1" [(ngModel)]="item.palletsOrderedCnt">
         <ion-icon range-left>0</ion-icon>
-        <ion-icon range-right>21</ion-icon>
+        <ion-icon range-right>{{this.min(21,item.loadOffered)}}</ion-icon>
       </ion-range>
     </ion-item>
   </ion-list>
