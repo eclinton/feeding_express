@@ -27,11 +27,16 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { TimeAgoPipe } from '../timeago/timeAgo';
 import {AuthenticationService} from '../services/AuthenticationService'
+import { FoodBankService } from '../services/FoodBankService';
+
 import { LogoutPage } from '../pages/logout/logout';
+import { ContactPage } from '../pages/contact/contact';
+import { ModalContentPage } from '../pages/contact/modal';
 import { MessageService } from '../providers/message.service';
 import { BroadcastMessageListComponent } from '../components/broadcast-message-list/broadcast-message-list';
 
 import { HttpModule} from '@angular/http';
+import { TextAvatarDirective } from '../directives/text-avatar/text-avatar';
 //import { Headers} from '@angular/http';
 
 
@@ -65,7 +70,10 @@ export const firebaseConfig = {
     DeliveryDateAddressPage,
     InboxPage,
     BroadcastMessageListComponent,
-    NewBroadcastMessagePage
+    NewBroadcastMessagePage,
+    ContactPage,
+    ModalContentPage,
+    TextAvatarDirective
   ],
   imports: [
     BrowserModule,
@@ -95,13 +103,16 @@ export const firebaseConfig = {
     ConfirmOrderPage,
     DeliveryDateAddressPage,
     InboxPage,
-    NewBroadcastMessagePage
+    NewBroadcastMessagePage,
+    ContactPage,
+    ModalContentPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthenticationService,
+    FoodBankService,
     MessageService
   ]
 })

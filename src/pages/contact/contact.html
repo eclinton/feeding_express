@@ -1,0 +1,126 @@
+<!--
+  Generated template for the ContactPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{FBname}}</ion-title>
+    <!--button ion-button item-end (click)="addContact()">
+      <ion-icon name="person-add"></ion-icon>
+    </button-->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-fab right bottom>
+    <button ion-fab icon-only block (click)="addContact()">
+      <ion-icon name="person-add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let FBContact of FBContacts | async">
+      <ion-item text-wrap>
+
+        <ion-item no-lines>
+
+
+          <!--ion-card-->
+            <ion-list-header text-wrap>
+              <text-avatar [text]="FBContact.name" item-start>
+              </text-avatar>
+              <!--ion-avatar item-start>
+                <img src="" width="60" height="60">
+              </ion-avatar-->
+              {{FBContact.name}}
+            </ion-list-header>
+
+            <ion-item>
+              Position :
+
+              <h2 ion-text color="dark" item-end>
+                {{FBContact.position}}
+
+              </h2>
+
+
+            </ion-item>
+            <ion-item text-wrap>
+              Team :
+
+              <h2 ion-text color="dark" item-end>
+                {{FBContact.team}}
+
+              </h2>
+
+
+            </ion-item>
+            <ion-item>
+              Email :
+
+              <h2 ion-text color="dark" item-end>
+                {{FBContact.email}}
+
+              </h2>
+
+
+            </ion-item>
+            <ion-item>
+              Phone :
+
+              <h2 ion-text color="dark" item-end>
+                {{FBContact.phone}}
+
+              </h2>
+
+
+            </ion-item>
+            <ion-item>
+              Cell :
+
+              <h2 ion-text color="dark" item-end>
+                {{FBContact.cell}}
+
+              </h2>
+
+
+            </ion-item>
+            <ion-item no-lines>
+
+              <ion-note item-end small>
+                {{ FBContact.date | timeAgo}}
+              </ion-note>
+            </ion-item>
+          <!--/ion-card-->
+
+        </ion-item>
+
+
+
+
+
+
+      </ion-item>
+
+
+
+      <ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, FBContact)">
+        <button ion-button icon-only (click)="editItem(slidingItem,FBContact)" color="secondary">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button icon-only expandable (click)="removeItem(slidingItem,FBContact)" color="danger">
+          <ion-icon name="trash"></ion-icon>
+          </button>
+      </ion-item-options>
+
+
+
+
+
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

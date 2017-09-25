@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+       
+        <ion-title>
+            {{FBname}}
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" >Cancel</span>
+        
+        <!--ion-icon name="md-close" showWhen="android,windows"></ion-icon-->
+      </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="save()">
+        <span ion-text color="primary" >Save</span>
+        <!--ion-icon name="checkmark" showWhen="android,windows"></ion-icon-->
+      </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input type="string" [(ngModel)]="c.name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Position</ion-label>
+        <ion-input type="string" [(ngModel)]="c.position"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Team</ion-label>
+        <ion-input type="string" [(ngModel)]="c.team"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="c.email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Phone</ion-label>
+        <ion-input type="tel" [(ngModel)]="c.phone"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Cell</ion-label>
+        <ion-input type="tel" [(ngModel)]="c.cell"></ion-input>
+    </ion-item>
+</ion-content>
