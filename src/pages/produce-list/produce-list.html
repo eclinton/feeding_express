@@ -25,7 +25,7 @@
   </ion-list-->
   <p padding-left padding-right> </p>
   <div> </div>
-  <ion-fab right bottom *ngIf="user.domain == '@feedingexpress.com'">
+  <ion-fab right bottom *ngIf="user.domain == '@feedingtexas.org'">
     <button ion-fab icon-only block (click)="addProduce()">
       <ion-icon name="add"></ion-icon>
     </button>
@@ -48,7 +48,7 @@
           </ion-badge>
 
           <!--ion-badge item-end-->
-          <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain == '@foodbank.com'" item-end>
+          <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain != '@feedingtexas.org'" item-end>
             <!--ion-item-->
             ${{product.costPerLb}}/lb
             <ion-icon name="cart" small></ion-icon>
@@ -68,7 +68,7 @@
         </ion-item>
       </ion-item>
 
-      <ion-item-options side="right" *ngIf="user.domain == '@feedingexpress.com'" (ionSwipe)="removeItem(slidingItem, product)">
+      <ion-item-options side="right" *ngIf="user.domain == '@feedingtexas.org'" (ionSwipe)="removeItem(slidingItem, product)">
         <button ion-button icon-only (click)="editItem(slidingItem,product)" color="secondary">
           <ion-icon name="create"></ion-icon>
         </button>

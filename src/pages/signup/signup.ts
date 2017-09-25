@@ -23,27 +23,63 @@ export class SignUpPage {
   join() {
 
     console.log("joining");
-   // this.error = false;
+    // this.error = false;
 
 
-   // try {
+    // try {
     var self = this;
-    if (!this.user.email || !this.user.password || !this.user.firstName || !this.user.lastName)
+    if (!this.user.email || !this.user.password)//|| !this.user.firstName || !this.user.lastName) 
     {
       let alert = self.alertCtrl.create({
-          title: 'Error',
-          subTitle: "Incomplete input",
-          buttons: ['OK']
-        });
+        title: 'Error',
+        subTitle: "Incomplete input",
+        buttons: ['OK']
+      });
       alert.present();
       return;
 
     }
-    var result = this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password).then(function(onResolve) {
-      console.log("onResolve.");
-      self.appCtrl.getRootNav().setRoot(ProduceList);
 
-    }, function(error) {
+
+
+
+
+
+    var result = this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password).then(function (onResolve) {
+      console.log("onResolve.");
+      let user = self.afAuth.auth.currentUser;
+      user.sendEmailVerification().then(
+        function () {
+          let alert = self.alertCtrl.create({
+            title: 'Email sent',
+            subTitle: "Success",
+            buttons: ['OK']
+          });
+          alert.present();
+          return;
+
+        }).catch(
+        function (error) {
+          let alert = self.alertCtrl.create({
+            title: 'Error',
+            subTitle: error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          return;
+
+
+
+        }
+        )
+
+
+
+
+      //self.appCtrl.getRootNav().setRoot(ProduceList);
+      self.appCtrl.navPop();
+
+    }, function (error) {
 
       // this.error = true;
       var errorCode = error.name;
@@ -51,8 +87,7 @@ export class SignUpPage {
 
       console.log(errorCode);
       console.log(errorMessage);
-      if (errorMessage)
-      {
+      if (errorMessage) {
         let alert = self.alertCtrl.create({
           title: 'Error',
           subTitle: errorMessage,
@@ -63,10 +98,11 @@ export class SignUpPage {
 
       }
     });
-      //console.log(this.error);
+
+    //console.log(this.error);
 
 
-  //  }
+    //  }
     /*
     catch (e) {
       console.log("done");

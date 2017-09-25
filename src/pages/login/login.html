@@ -10,14 +10,14 @@
     <ion-input type="text" [(ngModel)]="user.username"></ion-input>
   </ion-item>
 
-  <ion-item>
-<ion-label floating>Domain</ion-label>
-      <ion-select [(ngModel)]="user.domain" >
+  <!--ion-item>
+    <ion-label floating>Domain</ion-label>
+    <ion-select [(ngModel)]="user.domain">
       <ion-option value="@feedingexpress.com">Feeding Texas</ion-option>
       <ion-option value="@foodbank.com">Food Bank</ion-option>
 
     </ion-select>
-   </ion-item>
+  </ion-item-->
 
   <ion-item>
     <ion-label floating>Password</ion-label>
@@ -35,9 +35,9 @@
     <button ion-button clear (click)="forgotPassword()">Forgot password?</button>
   </div>
 
-  <!--div style="text-align: center; padding-top: 5%">
+  <div style="text-align: center; padding-top: 5%">
     <button ion-button small clear color="dark" (click)="signUp()">
       Need an account?&nbsp; <b>Sign Up >></b>
     </button>
-  </div-->
+  </div>
 </ion-content>

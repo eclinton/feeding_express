@@ -7,7 +7,7 @@ import { ProduceAvailableList } from '../produce-available-list/produce-availabl
 import { User } from "../../models/user/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
-import {AuthenticationService} from '../../services/AuthenticationService';
+import { AuthenticationService } from '../../services/AuthenticationService';
 
 @Component({
   selector: 'page-login',
@@ -17,27 +17,56 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private authService: AuthenticationService, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController) {}
+  constructor(private authService: AuthenticationService, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController) { }
 
   signIn() {
-    this.user.email = this.user.username + this.user.domain;
-    console.log(this.user.email);
-    if (!this.user.email || !this.user.password || !this.user.domain)
-    {
+    this.user.email = this.user.username; //+ this.user.domain;
+    this.user.domain = '@' + this.user.email.replace(/.*@/, "");
+    console.log(this.user.email)
+    console.log(this.user.domain)
+    if (!this.user.email || !this.user.password || !this.user.domain) {
       let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: "Incomplete input",
-          buttons: ['OK']
-        });
+        title: 'Error',
+        subTitle: "Incomplete input",
+        buttons: ['OK']
+      });
       alert.present();
       return;
     }
     var self = this;
     this.authService.setDomain(this.user.domain);
-    this.authService.getAuth().auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function(onResolve) {
+    this.authService.getAuth().auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function (onResolve) {
       console.log("onResolve.");
-      self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
-    }, function(error) {
+      let user = self.authService.getAuth().auth.currentUser;
+      if (user.emailVerified || (self.user.email == "admin@feedingtexas.org") || (self.user.email == "admin@foodbank.org")) {
+        self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
+        return;
+
+      }else {
+        let alert = self.alertCtrl.create({
+          title: 'Error',
+          subTitle: "Email is not verified",
+          buttons: ['OK']
+        });
+        alert.present();
+        return;
+
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }, function (error) {
 
       var errorCode = error.name;
       var errorMessage = error.message;
@@ -53,7 +82,7 @@ export class LoginPage {
     });
   }
 
-  forgotPassword() {}
+  forgotPassword() { }
 
   signUp() {
     this.navCtrl.push(SignUpPage);

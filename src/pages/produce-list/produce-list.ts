@@ -35,10 +35,10 @@ export class ProduceList {
 
     this.user.domain = this.authService.getDomain();
 
-    if (this.user.domain == "@feedingexpress.com") {
-      console.log("feedingexpress login!");
+    if (this.user.domain == "@feedingtexas.org") {
+      console.log("feedingtexas login!");
     }
-    if (this.user.domain == "@foodbank.com") {
+    else{
       console.log("foodbank login!");
     }
 
