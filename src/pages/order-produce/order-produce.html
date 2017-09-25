@@ -33,6 +33,11 @@
         <ion-icon range-right>{{this.min(21,item.loadOffered)}}</ion-icon>
       </ion-range>
     </ion-item>
+    <ion-item>
+
+      <ion-label floating>Enter Purchase Order #</ion-label>
+      <ion-input type="number" [(ngModel)]="item.pOnum"></ion-input>
+    </ion-item>
   </ion-list>
 
   <ion-card>
@@ -68,7 +73,7 @@
         </ion-item>
 
         <ion-item>
-          Truckloads Offered: 
+          Truckloads Offered:
           <ion-badge item-end>1/day</ion-badge>
         </ion-item>
 
@@ -102,6 +107,8 @@
           Transport:
           <ion-badge item-end>{{item.transport}}</ion-badge>
         </ion-item>
+
+
       </ion-list>
     </ion-item>
     <ion-list>

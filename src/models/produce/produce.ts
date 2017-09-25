@@ -21,4 +21,5 @@ export interface Produce {
   state: string;
   zipCode: string;
   packageDim : string; 
+  pOnum : number
 }
