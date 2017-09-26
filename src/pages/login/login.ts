@@ -8,6 +8,7 @@ import { User } from "../../models/user/user";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AlertController } from 'ionic-angular';
 import { AuthenticationService } from '../../services/AuthenticationService';
+import { FoodBankService } from '../../services/FoodBankService';
 
 @Component({
   selector: 'page-login',
@@ -17,13 +18,23 @@ export class LoginPage {
 
   user = {} as User;
 
-  constructor(private authService: AuthenticationService, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController) { }
+  constructor(private authService: AuthenticationService, public appCtrl: App, public navCtrl: NavController, public alertCtrl: AlertController, public fb: FoodBankService) { }
 
   signIn() {
     this.user.email = this.user.username; //+ this.user.domain;
-    this.user.domain = '@' + this.user.email.replace(/.*@/, "");
+    this.user.domain = this.user.email.replace(/.*@/, "");
     console.log(this.user.email)
     console.log(this.user.domain)
+    if (this.fb.FBS.map(n => n.domain).indexOf(this.user.domain) == -1) {
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: "Unauthorized domain",
+        buttons: ['OK']
+      });
+      alert.present();
+      return;
+    }
+    this.user.domain = "@" + this.user.domain
     if (!this.user.email || !this.user.password || !this.user.domain) {
       let alert = this.alertCtrl.create({
         title: 'Error',
@@ -42,7 +53,7 @@ export class LoginPage {
         self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
         return;
 
-      }else {
+      } else {
         let alert = self.alertCtrl.create({
           title: 'Error',
           subTitle: "Email is not verified",

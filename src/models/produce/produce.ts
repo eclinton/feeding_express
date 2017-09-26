@@ -13,7 +13,7 @@ export interface Produce {
   estimatedLoadCost: number;
   vendorName: string;
   days: number;
-  combo: number;
+  combo: string;
   comments: string;
   deliveryDate: string;
   address: string;
@@ -21,5 +21,5 @@ export interface Produce {
   state: string;
   zipCode: string;
   packageDim : string; 
-  pOnum : number
+  pOnum : string
 }
