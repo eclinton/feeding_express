@@ -31,8 +31,10 @@ export class LoginPage {
         subTitle: "Unauthorized domain",
         buttons: ['OK']
       });
-      alert.present();
-      return;
+      if (this.user.domain != "foodbank.org") {
+        alert.present();
+        return;
+      }
     }
     this.user.domain = "@" + this.user.domain
     if (!this.user.email || !this.user.password || !this.user.domain) {
