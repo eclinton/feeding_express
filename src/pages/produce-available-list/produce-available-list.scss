@@ -12,3 +12,17 @@ page-produce-available-list {
     float: right;
   }
 }
+ion-navbar.toolbar.toolbar-md, .toolbar-background-md{
+    background-color: #4EA975;
+    .toolbar-title-md{color: white;}
+    button.button.button-md.button-clear.button-clear-md{color: white;}
+    button.bar-buttons.bar-buttons-md.bar-button.bar-button-md.bar-button-default.bar-button-default-md.bar-button-menutoggle.bar-button-menutoggle-md{
+        color: white;
+    }
+}
+
+ion-navbar {
+    .toolbar-content.toolbar-content-md{
+        display: flex;
+    }
+}
