@@ -37,6 +37,7 @@ import { BroadcastMessageListComponent } from '../components/broadcast-message-l
 
 import { HttpModule} from '@angular/http';
 import { TextAvatarDirective } from '../directives/text-avatar/text-avatar';
+import {Autoresize} from '../directives/auto-resize-textarea/autoresize';
 //import { Headers} from '@angular/http';
 
 
@@ -73,7 +74,9 @@ export const firebaseConfig = {
     NewBroadcastMessagePage,
     ContactPage,
     ModalContentPage,
-    TextAvatarDirective
+    TextAvatarDirective,
+    Autoresize
+
   ],
   imports: [
     BrowserModule,

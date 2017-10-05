@@ -10,6 +10,7 @@
 <ion-content fullscreen>
   <ion-list>
     <ion-item-sliding #slidingItem *ngFor="let order of orders | async">
+
       <ion-item text-wrap>
 
         <ion-item no-lines>
@@ -72,7 +73,18 @@
                 {{order.pOnum}}
 
               </h2>
+
+
+
+            </ion-item>
+            <ion-item text-wrap >
               
+              
+                {{order.addressComments}}
+
+              
+              
+
 
 
             </ion-item>
