@@ -30,26 +30,44 @@
 
 
           <!--ion-card-->
-            <ion-list-header text-wrap>
-              <text-avatar [text]="FBContact.name" item-start>
-              </text-avatar>
-              <!--ion-avatar item-start>
+          <ion-list-header text-wrap>
+            <text-avatar [text]="FBContact.name" item-start>
+            </text-avatar>
+            <!--ion-avatar item-start>
                 <img src="" width="60" height="60">
               </ion-avatar-->
-              {{FBContact.name}}
-            </ion-list-header>
+            {{FBContact.name}}
+          </ion-list-header>
 
-            <ion-item>
-              Position :
+          <ion-item>
+            Position :
 
-              <h2 ion-text color="dark" item-end>
-                {{FBContact.position}}
+            <h2 ion-text color="dark" item-end>
+              {{FBContact.position}}
 
-              </h2>
+            </h2>
 
 
-            </ion-item>
-            <ion-item text-wrap>
+          </ion-item>
+          <ion-item>
+            <ion-list>
+              <ion-list-header>
+                Team(s)
+              </ion-list-header>
+              <ion-item *ngIf="FBContact.sourcing">
+                Sourcing
+              </ion-item>
+              <ion-item *ngIf="FBContact.receiving">
+                Receiving
+
+              </ion-item>
+              <ion-item *ngIf="FBContact.accounting">
+                Accounting
+
+              </ion-item>
+            </ion-list>
+          </ion-item>
+          <!--ion-item text-wrap>
               Team :
 
               <h2 ion-text color="dark" item-end>
@@ -58,43 +76,53 @@
               </h2>
 
 
-            </ion-item>
-            <ion-item>
-              Email :
+            </ion-item-->
+          <ion-item>
+            Email :
 
-              <h2 ion-text color="dark" item-end>
-                {{FBContact.email}}
+            <h2 ion-text color="dark" item-end>
+              {{FBContact.email}}
 
-              </h2>
-
-
-            </ion-item>
-            <ion-item>
-              Phone :
-
-              <h2 ion-text color="dark" item-end>
-                {{FBContact.phone}}
-
-              </h2>
+            </h2>
 
 
-            </ion-item>
-            <ion-item>
-              Cell :
+          </ion-item>
+          <ion-item>
+            Phone :
 
-              <h2 ion-text color="dark" item-end>
-                {{FBContact.cell}}
+            <h2 ion-text color="dark" item-end>
+              {{FBContact.phone}}
 
-              </h2>
+            </h2>
 
 
-            </ion-item>
-            <ion-item no-lines>
+          </ion-item>
+          <ion-item>
+            Cell :
 
-              <ion-note item-end small>
-                {{ FBContact.date | timeAgo}}
-              </ion-note>
-            </ion-item>
+            <h2 ion-text color="dark" item-end>
+              {{FBContact.cell}}
+
+            </h2>
+
+
+          </ion-item>
+          <ion-item>
+            Preferred Mode of Contact :
+
+            <h2 ion-text color="dark" item-end>
+              {{FBContact.preferredContact}}
+
+            </h2>
+
+
+          </ion-item>
+          <ion-item no-lines>
+
+            <ion-note item-end small>
+              {{ FBContact.date | timeAgo}}
+            </ion-note>
+          </ion-item>
           <!--/ion-card-->
 
         </ion-item>

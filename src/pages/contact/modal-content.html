@@ -29,10 +29,29 @@
         <ion-label floating>Position</ion-label>
         <ion-input type="string" [(ngModel)]="c.position"></ion-input>
     </ion-item>
-    <ion-item>
-        <ion-label floating>Team</ion-label>
-        <ion-input type="string" [(ngModel)]="c.team"></ion-input>
-    </ion-item>
+    <!--ion-item-->
+        <ion-list no-border>
+            <ion-list-header>
+                Team(s):
+            </ion-list-header>
+            <ion-item>
+                <ion-label> Sourcing </ion-label>
+                <ion-checkbox [(ngModel)]="c.sourcing"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label> Receiving </ion-label>
+                <ion-checkbox [(ngModel)]="c.receiving"></ion-checkbox>
+            </ion-item>
+            <ion-item>
+                <ion-label> Accounting </ion-label>
+                <ion-checkbox [(ngModel)]="c.accounting"></ion-checkbox>
+            </ion-item>
+        </ion-list>
+
+    <!--/ion-item-->
+
+
+    <!--ion-input type="string" [(ngModel)]="c.team"></ion-input-->
     <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="email" [(ngModel)]="c.email"></ion-input>
@@ -44,5 +63,13 @@
     <ion-item>
         <ion-label floating>Cell</ion-label>
         <ion-input type="tel" [(ngModel)]="c.cell"></ion-input>
+    </ion-item>
+     <ion-item>
+        <ion-label floating>Preferred Mode of Contact</ion-label>
+        <ion-select [(ngModel)]="c.preferredContact">
+            <ion-option value="Mobile">Mobile </ion-option>
+            <ion-option value="Email">Email </ion-option>
+            <ion-option value="Phone">Phone </ion-option>
+        </ion-select>
     </ion-item>
 </ion-content>
