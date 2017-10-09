@@ -22,14 +22,18 @@
       <ion-icon name="person-add"></ion-icon>
     </button>
   </ion-fab>
-  <ion-list>
-    <ion-item-sliding #slidingItem *ngFor="let FBContact of FBContacts | async">
-      <ion-item text-wrap>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3 *ngFor="let FBContact of FBContacts | async">
+        <!--ion-list-->
+        <!--ion-item-sliding #slidingItem *ngFor="let FBContact of FBContacts | async"/-->
+        <!--ion-item text-wrap-->
 
-        <ion-item no-lines>
+        <!--ion-item no-lines-->
 
 
-          <!--ion-card-->
+        <!--ion-card-->
+        <ion-card>
           <ion-list-header text-wrap>
             <text-avatar [text]="FBContact.name" item-start>
             </text-avatar>
@@ -117,38 +121,62 @@
 
 
           </ion-item>
-          <ion-item no-lines>
+          <!--ion-item no-lines>
 
             <ion-note item-end small>
               {{ FBContact.date | timeAgo}}
             </ion-note>
-          </ion-item>
+          </ion-item-->
           <!--/ion-card-->
 
-        </ion-item>
+          <!--/ion-item-->
 
 
 
 
 
 
-      </ion-item>
+          <!--/ion-item-->
+             <ion-row>
+            
+            <ion-col >
+              <button ion-button icon-left clear small (click)="editItem(0,FBContact)">
+              <ion-icon name="create"></ion-icon>
+              <div> Edit </div>
+              </button>
+            </ion-col>
+            <ion-col >
+              <button ion-button icon-left clear small color="danger" (click)="removeItem(0,FBContact)">
+              <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                {{ FBContact.date | timeAgo}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
 
 
 
-      <ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, FBContact)">
-        <button ion-button icon-only (click)="editItem(slidingItem,FBContact)" color="secondary">
+          <!--ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, FBContact)">
+            <button ion-button icon-only (click)="editItem(slidingItem,FBContact)" color="secondary">
           <ion-icon name="create"></ion-icon>
         </button>
-        <button ion-button icon-only expandable (click)="removeItem(slidingItem,FBContact)" color="danger">
+            <button ion-button icon-only expandable (click)="removeItem(slidingItem,FBContact)" color="danger">
           <ion-icon name="trash"></ion-icon>
           </button>
-      </ion-item-options>
+          </ion-item-options-->
 
 
 
 
 
-    </ion-item-sliding>
-  </ion-list>
+          <!--/ion-item-sliding-->
+          <!--/ion-list-->
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
 </ion-content>

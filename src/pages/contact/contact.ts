@@ -45,6 +45,7 @@ export class ContactPage {
   }
 
   public editItem(slidingItem: ItemSliding, item: any) {
+    if(slidingItem)
     slidingItem.close();
     let modal = this.modalCtrl.create(ModalContentPage, { FBname: this.FBname, key: item.$key, data : item })
     modal.present()
@@ -53,7 +54,7 @@ export class ContactPage {
 
   public removeItem(slidingItem: ItemSliding, item: any) {
     this.FBContacts.remove(item.$key);
-
+    if(slidingItem)
     slidingItem.close();
 
   }
