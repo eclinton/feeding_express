@@ -8,116 +8,151 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-list>
-    <ion-item-sliding #slidingItem *ngFor="let order of orders | async">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3 *ngFor="let order of orders | async">
+        <!--ion-item-sliding #slidingItem *ngFor="let order of orders | async"-->
 
-      <ion-item text-wrap>
+        <!--ion-item text-wrap-->
 
-        <ion-item no-lines>
-
-
-          <ion-card>
-            <ion-list-header>
-              <ion-avatar item-start>
-                <img src="{{order.icon}}" width="60" height="60">
-              </ion-avatar>
-              {{order.title}}
-            </ion-list-header>
-
-            <ion-item>
-              Vendor :
-
-              <h2 ion-text color="dark" item-end>
-                {{order.vendorName}}
-
-              </h2>
+        <!--ion-item no-lines-->
 
 
-            </ion-item>
-            <ion-item text-wrap>
-              Food Bank :
+        <ion-card>
+          <ion-list-header>
+            <ion-avatar item-start>
+              <img src="{{order.icon}}" width="60" height="60">
+            </ion-avatar>
+            {{order.title}}
+          </ion-list-header>
 
-              <h2 ion-text color="dark" item-end>
-                {{order.location}}
+          <ion-item>
+            Vendor :
 
-              </h2>
+            <h2 ion-text color="dark" item-end>
+              {{order.vendorName}}
 
-
-            </ion-item>
-            <ion-item>
-              Delivery Date :
-
-              <h2 ion-text color="dark" item-end>
-                {{order.deliveryDate}}
-
-              </h2>
+            </h2>
 
 
-            </ion-item>
-            <ion-item>
-              Quantity :
+          </ion-item>
+          <ion-item text-wrap>
+            Location :
+
+            <h2 ion-text color="dark" item-end>
+              {{order.location}}
+
+            </h2>
 
 
-              <h2 ion-text color="dark" item-end>
-                {{order.palletsOrderedCnt}}
+          </ion-item>
+          <ion-item>
+            Delivery Date :
 
-              </h2>
+            <h2 ion-text color="dark" item-end>
+              {{order.deliveryDate}}
+
+            </h2>
 
 
+          </ion-item>
+          <ion-item>
+            Quantity :
 
-            </ion-item>
-            <ion-item>
-              PO# :
 
-              <h2 ion-text color="dark" item-end>
-                {{order.pOnum}}
+            <h2 ion-text color="dark" item-end>
+              {{order.palletsOrderedCnt}}
 
-              </h2>
+            </h2>
 
 
 
-            </ion-item>
-            <ion-item text-wrap >
-              
-              
-                {{order.addressComments}}
+          </ion-item>
+          <ion-item>
+            PO# :
 
-              
-              
+            <h2 ion-text color="dark" item-end>
+              {{order.pOnum}}
+
+            </h2>
 
 
 
-            </ion-item>
-            <ion-item no-lines>
+          </ion-item>
+
+          <ion-item>
+            Submitted By:
+
+            <ion-badge color="light" item-end *ngIf="order.orderByUser">
+              {{order.orderByUser}} @ {{order.orderByFB}}
+            </ion-badge>
+
+          </ion-item>
+
+
+
+          <ion-item text-wrap>
+
+
+            {{order.addressComments}}
+
+
+
+
+
+
+          </ion-item>
+          <ion-row>
+            <!--ion-col>
+              <button ion-button icon-left clear small>
+              <ion-icon name="create"></ion-icon>
+              </button>
+            </ion-col-->
+            <ion-col>
+              <button ion-button icon-left clear small color="danger" (click)="removeItem(0,order)">
+              <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                {{ order.date | timeAgo}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+          <!--ion-item no-lines>
 
               <ion-note item-end small>
                 {{ order.date | timeAgo}}
               </ion-note>
-            </ion-item>
-          </ion-card>
+            </ion-item-->
+        </ion-card>
 
-        </ion-item>
-
-
+        <!--/ion-item-->
 
 
 
 
-      </ion-item>
+
+
+        <!--/ion-item-->
 
 
 
-      <ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, order)">
+        <!--ion-item-options side="right" (ionSwipe)="removeItem(slidingItem, order)">
         <button ion-button icon-only expandable (click)="removeItem(slidingItem,order)" color="danger">
           <ion-icon name="trash"></ion-icon>
           </button>
-      </ion-item-options>
+      </ion-item-options-->
 
 
 
 
 
-    </ion-item-sliding>
-  </ion-list>
+        <!--/ion-item-sliding-->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 
 </ion-content>

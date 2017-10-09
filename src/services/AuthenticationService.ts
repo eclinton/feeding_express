@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class AuthenticationService {
   private domain:string = '';
+  private username:string ='';
 
   constructor(private afAuth: AngularFireAuth )
   {
@@ -16,8 +17,16 @@ export class AuthenticationService {
     return this.domain;
   }
 
+  getUsername():string{
+    return this.username
+  }
+
   setDomain(credentials:string) {
     this.domain = credentials;
+  }
+  setUsername(credentials:string)
+  {
+    this.username = credentials
   }
 
   getAuth(): AngularFireAuth{

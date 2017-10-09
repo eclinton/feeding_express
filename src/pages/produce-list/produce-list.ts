@@ -102,10 +102,12 @@ export class ProduceList {
   public removeItem(slidingItem: ItemSliding, item: any) {
     this.products.remove(item.$key);
 
+    if(slidingItem)
     slidingItem.close();
   }
 
   public editItem(slidingItem: ItemSliding, item: any) {
+    if(slidingItem)
     slidingItem.close();
     this.navCtrl.push(AddProducePage, item)
   }

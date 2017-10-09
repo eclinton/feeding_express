@@ -22,5 +22,8 @@ export interface Produce {
   state: string;
   zipCode: string;
   packageDim : string; 
-  pOnum : string
+  pOnum : string;
+  orderByUser : string;
+  orderByFB : string;
+  orderByDomain: string;
 }

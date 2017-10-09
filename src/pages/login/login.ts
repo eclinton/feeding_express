@@ -48,6 +48,7 @@ export class LoginPage {
     }
     var self = this;
     this.authService.setDomain(this.user.domain);
+    this.authService.setUsername(this.user.username.split("@")[0])
     this.authService.getAuth().auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function (onResolve) {
       console.log("onResolve.");
       let user = self.authService.getAuth().auth.currentUser;

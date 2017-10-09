@@ -5,6 +5,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import * as humanize from 'humanize';
 import { AlertController } from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
+import {AuthenticationService} from '../../services/AuthenticationService';
+import {FoodBankService} from '../../services/FoodBankService'
 import 'rxjs/add/operator/take'
 
 /**
@@ -23,7 +25,9 @@ export class DeliveryDateAddressPage {
   private orders: FirebaseListObservable<any[]>;
   private products: FirebaseListObservable<any[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, 
+    public toastCtrl: ToastController, private authService: AuthenticationService, public fb: FoodBankService) {
+
     this.item = navParams.data;
     this.item.deliveryDate = new Date().toISOString();
     this.orders = af_db.list('/orders');
@@ -71,6 +75,25 @@ export class DeliveryDateAddressPage {
     let self = this;
     this.item.date = humanize.time();
     this.item.deliveryDate = new Date(this.item.deliveryDate).toDateString();
+    let foo = (domain) => {for(let entry of this.fb.FBS){
+                                if(domain == "@"+entry.domain)
+                                  {
+                                    return entry.name
+                                  }
+                                  else
+                                    {
+                                     // console.log(domain)
+                                     // console.log(entry.domain)
+                                    }
+                            }
+                            return ""
+                          }
+
+    this.item.orderByFB = foo(this.authService.getDomain())
+    this.item.orderByUser = this.authService.getUsername()
+    this.item.orderByDomain = this.authService.getDomain()
+    console.log(this.item.orderByFB)
+    console.log(this.item.orderByUser)
 
 
     this.orders.push(this.item).then(

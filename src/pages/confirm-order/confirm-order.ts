@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular';
 import * as humanize from 'humanize';
 import { ProduceList } from '../produce-list/produce-list';
 import {DeliveryDateAddressPage} from '../delivery-date-address/delivery-date-address';
+import {AuthenticationService} from '../../services/AuthenticationService';
 
 
 /**
@@ -23,7 +24,7 @@ export class ConfirmOrderPage {
   item = {} as Produce;
   //private orders: FirebaseListObservable<any[]>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, private authService: AuthenticationService) {
     this.item = navParams.data;
     //this.orders = af_db.list('/orders');
 

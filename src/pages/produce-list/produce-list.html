@@ -13,7 +13,7 @@
     <ion-icon id="notification" name="notifications"></ion-icon>
     <ion-icon id="send-notification" name="send" (click)="sendNotification()"></ion-icon>
   -->
-</ion-navbar>
+  </ion-navbar>
 </ion-header>
 
 <ion-content fullscreen>
@@ -30,42 +30,76 @@
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
-  <ion-list>
-    <ion-item-sliding #slidingItem *ngFor="let product of products | async">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3 *ngFor="let product of products | async">
+        <!-- <ion-list> -->
+        <!-- <ion-item-sliding #slidingItem *ngFor="let product of products | async">
       <ion-item text-wrap>
-        <ion-item no-lines>
-          <ion-avatar item-start>
-            <img src="{{product.icon}}" width="60" height="60">
-          </ion-avatar>
+        <ion-item no-lines> -->
+        <ion-card>
+          <ion-item no-lines>
+            <ion-avatar item-start>
+              <img src="{{product.icon}}" width="60" height="60">
+            </ion-avatar>
 
-          <!--button ion-button color="light"-->
-          <!--ion-item text-wrap-->
-          {{product.title}}
-          <!--/ion-item-->
-          <!--/button-->
-          <ion-badge color="light" item-end *ngIf="product.storage">
-            {{product.storage}}
-          </ion-badge>
+            <!--button ion-button color="light"-->
+            <!--ion-item text-wrap-->
+            {{product.title}}
+            <!--/ion-item-->
+            <!--/button-->
+            <ion-badge color="light" item-end *ngIf="product.storage">
+              {{product.storage}}
+            </ion-badge>
 
-          <!--ion-badge item-end-->
-          <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain != '@feedingtexas.org'" item-end>
+            <!--ion-badge item-end-->
+            <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain != '@feedingtexas.org'" item-end>
             <!--ion-item-->
             ${{product.costPerLb}}/lb
             <ion-icon name="cart" small></ion-icon>
             <!--/ion-item-->
+            
           </button>
+          </ion-item>
           <!--/ion-badge-->
-        </ion-item>
+          <!--/ion-item-->
 
-        <ion-item no-lines>
-          <ion-badge>
-            <ion-icon name="basket" small></ion-icon>
-            {{product.loadOffered}} pallets
-          </ion-badge>
-          <ion-note item-end small>
-            {{ product.date | timeAgo}}
-          </ion-note>
-        </ion-item>
+          <!--ion-item no-lines>
+            <ion-badge>
+              <ion-icon name="basket" small></ion-icon>
+              {{product.loadOffered}} pallets
+            </ion-badge>
+            <ion-note item-end small>
+              {{ product.date | timeAgo}}
+            </ion-note>
+          </ion-item-->
+          <ion-row>
+            <ion-col>
+              <ion-badge>
+                <ion-icon name="basket" small></ion-icon>
+                {{product.loadOffered}} pallets
+              </ion-badge>
+            </ion-col>
+            <ion-col *ngIf="user.domain == '@feedingtexas.org'">
+              <button ion-button icon-left clear small (click)="editItem(0,product)">
+              <ion-icon name="create"></ion-icon>
+              <div> Edit </div>
+              </button>
+            </ion-col>
+            <ion-col *ngIf="user.domain == '@feedingtexas.org'">
+              <button ion-button icon-left clear small color="danger" (click)="removeItem(0,product)">
+              <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                {{ product.date | timeAgo}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
+        <!-- </ion-item>
       </ion-item>
 
       <ion-item-options side="right" *ngIf="user.domain == '@feedingtexas.org'" (ionSwipe)="removeItem(slidingItem, product)">
@@ -76,6 +110,9 @@
           <ion-icon name="trash"></ion-icon>
         </button>
       </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    </ion-item-sliding> -->
+        <!-- </ion-list> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

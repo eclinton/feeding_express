@@ -26,6 +26,7 @@ export class FoodBankService {
         { name: "Tarrant Area Food Bank", domain: "tafb.org" },
         { name: "Wichita Falls Area Food Bank", domain: "wfafb.org" },
         { name: "East Texas Food Bank", domain: "easttexasfoodbank.org" },
+         { name: "Generic Food Bank", domain: "foodbank.org" },
 
 
 
