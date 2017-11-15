@@ -75,9 +75,13 @@
           </ion-item-->
           <ion-row>
             <ion-col>
-              <ion-badge>
+              <ion-badge *ngIf="product.loadOffered !== this.MAX_VALUE">
                 <ion-icon name="basket" small></ion-icon>
                 {{product.loadOffered}} pallets
+              </ion-badge>
+              <ion-badge *ngIf="product.loadOffered === this.MAX_VALUE">
+                <ion-icon name="basket" small></ion-icon>
+                Infinite pallets
               </ion-badge>
             </ion-col>
             <ion-col *ngIf="user.domain == '@feedingtexas.org'">

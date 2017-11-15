@@ -25,6 +25,7 @@ export class ProduceList {
   private products: FirebaseListObservable<any[]>;
   private productRef;
   private user = {} as User;
+  private MAX_VALUE : number = Number.MAX_VALUE
   //private searchItems: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http, private authService: AuthenticationService) {

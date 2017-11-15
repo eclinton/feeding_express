@@ -15,6 +15,7 @@ import { ProduceList } from '../produce-list/produce-list';
 })
 export class AddProducePage {
   item = {} as Produce;
+  private infinite : boolean = false;
   private products: FirebaseListObservable<Produce[]>;
   private modify: boolean = false;
 
@@ -26,6 +27,7 @@ export class AddProducePage {
       console.log("modify case");
       this.item = navParams.data;
       this.modify = true;
+      this.infinite = (this.item.loadOffered == Number.MAX_VALUE);
     }
   }
 
@@ -79,6 +81,10 @@ export class AddProducePage {
       let self = this;
       this.item.date = humanize.time();
       this.item.estimatedLoadCost = 0;
+      if(this.infinite)
+      {
+         this.item.loadOffered = Number.MAX_VALUE;
+      }
 
       if (this.modify == false) {
         let h: Headers = new Headers();
