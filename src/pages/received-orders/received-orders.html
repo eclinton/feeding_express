@@ -23,7 +23,9 @@
             <ion-avatar item-start>
               <img src="{{order.icon}}" width="60" height="60">
             </ion-avatar>
-            {{order.title}}
+            <ion-label>
+              {{order.title}}
+            </ion-label>
           </ion-list-header>
 
           <ion-item>
@@ -86,6 +88,14 @@
             <ion-badge color="light" item-end *ngIf="order.orderByUser">
               {{order.orderByUser}} @ {{order.orderByFB}}
             </ion-badge>
+
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              Mark as done
+            </ion-label>
+
+            <ion-checkbox></ion-checkbox>
 
           </ion-item>
 

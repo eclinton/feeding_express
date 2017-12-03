@@ -26,4 +26,5 @@ export interface Produce {
   orderByUser : string;
   orderByFB : string;
   orderByDomain: string;
+  orderDone: boolean;
 }
