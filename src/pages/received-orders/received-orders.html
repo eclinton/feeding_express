@@ -8,6 +8,17 @@
 </ion-header>
 
 <ion-content fullscreen>
+  <ion-item *ngIf="this.fblogin==false"> 
+    <ion-label>
+      Pending Orders
+    </ion-label>
+    <ion-checkbox
+       
+      [(ngModel)]="this.pendingOnly" (ionChange)="updatePendingStatus()"></ion-checkbox>
+
+      
+  
+  </ion-item>
   <ion-grid>
     <ion-row>
       <ion-col col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3 *ngFor="let order of orders | async">
@@ -90,12 +101,13 @@
             </ion-badge>
 
           </ion-item>
-          <ion-item>
+          <ion-item >
+
             <ion-label>
-              Mark as done
+              Marked as done
             </ion-label>
 
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox [(ngModel)]="order.orderDone" (ionChange)="updateStatus(order)" disabled={{this.fblogin}}></ion-checkbox>
 
           </ion-item>
 
@@ -118,6 +130,12 @@
               <ion-icon name="create"></ion-icon>
               </button>
             </ion-col-->
+            <ion-col *ngIf="this.fblogin">
+                <button ion-button icon-left clear small (click)="editItem(order)">
+                <ion-icon name="create"></ion-icon>
+                <div> Edit </div>
+                </button>
+              </ion-col>
             <ion-col>
               <button ion-button icon-left clear small color="danger" (click)="removeItem(0,order)">
               <ion-icon name="trash"></ion-icon>

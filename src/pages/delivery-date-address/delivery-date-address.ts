@@ -24,13 +24,20 @@ export class DeliveryDateAddressPage {
   item = {} as Produce;
   private orders: FirebaseListObservable<any[]>;
   private products: FirebaseListObservable<any[]>;
+  private modify: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, 
     public toastCtrl: ToastController, private authService: AuthenticationService, public fb: FoodBankService) {
 
+
     this.item = navParams.data;
     this.item.deliveryDate = new Date().toISOString();
     this.orders = af_db.list('/orders');
+
+      if (navParams.get("orderByUser")) {
+        console.log("modify case");
+        this.modify = true;
+      }
     this.products = af_db.list('/products');
   }
 
@@ -50,8 +57,13 @@ export class DeliveryDateAddressPage {
       console.log(updated_item.loadOffered)
       console.log(this.item.palletsOrderedCnt)
 
+      if(this.modify)
+      {
+        //this.item.palletsOrderedCnt -= updated_item.
+      }
+
     //first need to make sure that enough of this produce is available
-      if ((updated_item.loadOffered ==0 ) || (this.item.palletsOrderedCnt > updated_item.loadOffered) ){
+      if (((updated_item.loadOffered ==0 ) || (this.item.palletsOrderedCnt > updated_item.loadOffered)) ){
         let alert = this.alertCtrl.create({
           title: 'Error',
           subTitle: 'Not enough pallets available',
@@ -69,6 +81,24 @@ export class DeliveryDateAddressPage {
       }
     })
 
+  }
+
+  update_db()
+  {/*
+    this.products.update(this.item.$key, this.item).then(
+      function (resolve) {
+        self.navCtrl.pop();
+      },
+      function (error) {
+        let alert = self.alertCtrl.create({
+          title: 'Error',
+          subTitle: error.message,
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    );
+    */
   }
 
   save_to_db(new_item: any) {
