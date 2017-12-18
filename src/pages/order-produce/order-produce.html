@@ -21,7 +21,7 @@
     </ion-list-header>
 
   </ion-list>
-
+<!--
   <ion-list>
     <ion-list-header>
       Pallets to order
@@ -63,7 +63,7 @@
         </ion-list-header>
         <ion-item>
           Estimated Total Cost:
-          <!--ion-badge item-end>{{item.estimatedLoadCost}}$</ion-badge-->
+         
           <ion-badge item-end>{{item.palletsOrderedCnt*2000*item.costPerLb}}$</ion-badge>
         </ion-item>
 
@@ -84,7 +84,7 @@
 
         <ion-item>
           Estimated Shelf Life:
-	  <ion-badge item-end>{{item.days}} days</ion-badge>
+          <ion-badge item-end>{{item.days}} days</ion-badge>
         </ion-item>
 
         <ion-item>
@@ -113,14 +113,210 @@
     </ion-item>
     <ion-list>
 
-      <!--ion-item *ngFor="let item of getItems(Tab)">
+     
         
 
-      </ion-item-->
+     
     </ion-list>
-    <button ion-button full color="secondary" (click)="preOrder(item)">Pre-order</button>
+
+  </ion-card>
+-->
+  <h5 ion-text> Products in this combo (testing phase): </h5>
+  <ion-card *ngFor="let combo of this.combo_list | async">
+
+
+
+    <ion-card>
+      <ion-segment [(ngModel)]="Tab">
+        <ion-segment-button value="Details">
+          Details
+        </ion-segment-button>
+        <ion-segment-button value="Comments">
+          Comments
+        </ion-segment-button>
+
+      </ion-segment>
+      <ion-item text-wrap *ngIf="Tab === 'Comments'">
+        {{combo.comments}}
+      </ion-item>
+      <ion-item *ngIf="Tab === 'Details'">
+        <ion-list>
+          <ion-list-header>
+            <ion-avatar item-start small>
+              <img src="{{combo.icon}}" width="60" height="60">
+            </ion-avatar>
+            {{combo.title}}
+          </ion-list-header>
+          <ion-item>
+            Estimated Total Cost:
+
+            <ion-badge item-end>{{combo.palletsOrderedCnt*2000*combo.costPerLb }}$</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Location:
+            <ion-badge item-end>{{combo.location}}</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Truckloads Offered:
+            <ion-badge item-end>1/day</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Vendor Name:
+            <ion-badge item-end>{{combo.vendorName}}</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Estimated Shelf Life:
+            <ion-badge item-end>{{combo.days}} days</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Product cost:
+            <ion-badge item-end>{{combo.costPerLb}}$/lb</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Packaging:
+            <ion-badge item-end>{{combo.storage}}</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Package Dimensions:
+            <ion-badge item-end>{{combo.packageDim}}</ion-badge>
+          </ion-item>
+
+
+          <ion-item>
+            Transport:
+            <ion-badge item-end>{{combo.transport}}</ion-badge>
+          </ion-item>
+
+
+
+        </ion-list>
+      </ion-item>
+      <ion-list>
+        <ion-list-header>
+          Pallets to order
+          <ion-badge item-end>{{combo.palletsOrderedCnt}}</ion-badge>
+        </ion-list-header>
+        <ion-item>
+          <ion-range min="0" max={{this.min(21,combo.loadOffered)}} step="1" [(ngModel)]="combo.palletsOrderedCnt">
+            <ion-icon range-left>0</ion-icon>
+            <ion-icon range-right>{{this.min(21,combo.loadOffered)}}</ion-icon>
+          </ion-range>
+        </ion-item>
+        <ion-item>
+
+          <ion-label floating>Enter Purchase Order #</ion-label>
+          <ion-input type="text" [(ngModel)]="combo.pOnum"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+
+
   </ion-card>
 
+  <!--ion-item *ngFor="let combo of this.combo_list | async">
+    <ion-list>
+      <ion-list-header>
+        Pallets to order
+        <ion-badge item-end>{{combo.palletsOrderedCnt}}</ion-badge>
+      </ion-list-header>
+      <ion-item>
+        <ion-range min="0" max={{this.min(21,combo.loadOffered)}} step="1" [(ngModel)]="combo.palletsOrderedCnt">
+          <ion-icon range-left>0</ion-icon>
+          <ion-icon range-right>{{this.min(21,combo.loadOffered)}}</ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-item>
+
+        <ion-label floating>Enter Purchase Order #</ion-label>
+        <ion-input type="text" [(ngModel)]="combo.pOnum"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-card>
+      <ion-segment [(ngModel)]="Tab">
+        <ion-segment-button value="Details">
+          Details
+        </ion-segment-button>
+        <ion-segment-button value="Comments">
+          Comments
+        </ion-segment-button>
+
+      </ion-segment>
+      <ion-item text-wrap *ngIf="Tab === 'Comments'">
+        {{combo.comments}}
+      </ion-item>
+      <ion-item *ngIf="Tab === 'Details'">
+        <ion-list>
+          <ion-list-header>
+            <ion-avatar item-start small>
+              <img src="{{combo.icon}}" width="60" height="60">
+            </ion-avatar>
+            {{combo.title}}
+          </ion-list-header>
+          <ion-item>
+            Estimated Total Cost:
+           
+            <ion-badge item-end>{{combo.palletsOrderedCnt*2000*combo.costPerLb}}$</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Location:
+            <ion-badge item-end>{{combo.location}}</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Truckloads Offered:
+            <ion-badge item-end>1/day</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Vendor Name:
+            <ion-badge item-end>{{combo.vendorName}}</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Estimated Shelf Life:
+            <ion-badge item-end>{{combo.days}} days</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Product cost:
+            <ion-badge item-end>{{combo.costPerLb}}$/lb</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Packaging:
+            <ion-badge item-end>{{combo.storage}}</ion-badge>
+          </ion-item>
+
+          <ion-item>
+            Package Dimensions:
+            <ion-badge item-end>{{combo.packageDim}}</ion-badge>
+          </ion-item>
+
+
+          <ion-item>
+            Transport:
+            <ion-badge item-end>{{combo.transport}}</ion-badge>
+          </ion-item>
+
+
+        </ion-list>
+      </ion-item>
+    </ion-card>
+  </ion-item-->
+
+
+
+
+  <button ion-button full color="secondary" (click)="preOrder(item)">Pre-order</button>
 
 
 </ion-content>

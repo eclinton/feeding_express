@@ -81,6 +81,7 @@ export class AddProducePage {
       let self = this;
       this.item.date = humanize.time();
       this.item.estimatedLoadCost = 0;
+      this.item.palletsOrderedCnt = 0;
       if(this.infinite)
       {
          this.item.loadOffered = Number.MAX_VALUE;

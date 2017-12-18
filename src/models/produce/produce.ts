@@ -13,7 +13,7 @@ export interface Produce {
   estimatedLoadCost: number;
   vendorName: string;
   days: number;
-  combo: string;
+  combo: number;
   comments: string;
   deliveryDate: string;
   address: string;

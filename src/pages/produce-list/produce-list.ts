@@ -5,7 +5,7 @@ import { ItemSliding } from 'ionic-angular';
 
 import { AddProducePage } from '../add-produce/add-produce';
 import { InboxPage } from '../inbox/inbox';
-import {OrderProducePage} from '../order-produce/order-produce';
+import { OrderProducePage } from '../order-produce/order-produce';
 import { AddSendNotification } from '../new-message/new-message';
 import { Produce } from '../../models/produce/produce';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -14,7 +14,7 @@ import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as humanize from 'humanize';
 import { User } from "../../models/user/user";
-import {AuthenticationService} from '../../services/AuthenticationService';
+import { AuthenticationService } from '../../services/AuthenticationService';
 
 
 @Component({
@@ -23,9 +23,11 @@ import {AuthenticationService} from '../../services/AuthenticationService';
 })
 export class ProduceList {
   private products: FirebaseListObservable<any[]>;
+  private combo_list: FirebaseListObservable<any[]>;
   private productRef;
   private user = {} as User;
-  private MAX_VALUE : number = Number.MAX_VALUE
+  //private item_ordered_plus_combo : FirebaseListObservable<any[]>;
+  private MAX_VALUE: number = Number.MAX_VALUE
   //private searchItems: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, public http: Http, private authService: AuthenticationService) {
@@ -39,7 +41,7 @@ export class ProduceList {
     if (this.user.domain == "@feedingtexas.org") {
       console.log("feedingtexas login!");
     }
-    else{
+    else {
       console.log("foodbank login!");
     }
 
@@ -103,22 +105,51 @@ export class ProduceList {
   public removeItem(slidingItem: ItemSliding, item: any) {
     this.products.remove(item.$key);
 
-    if(slidingItem)
-    slidingItem.close();
+    if (slidingItem)
+      slidingItem.close();
   }
 
   public editItem(slidingItem: ItemSliding, item: any) {
-    if(slidingItem)
-    slidingItem.close();
+    if (slidingItem)
+      slidingItem.close();
     this.navCtrl.push(AddProducePage, item)
   }
 
   public orderItem(item: any) {
-    this.navCtrl.push(OrderProducePage, item);
+    //this.item_ordered_plus_combo.push(item);
+    console.log("clicked to order item")
+    
+    this.combo_list = 
+    this.af_db.list('/products',
+      {
+        query: {
+          orderByChild: 'combo',
+          equalTo: item.combo
+        }
+      }
+    )
+     
+    
+    this.combo_list.subscribe((combos: any) => {
+      console.log("testing")
+     // this.products.forEach(c => { console.log("Item", c) })
+      this.navCtrl.push(OrderProducePage, { ordered_item: item, combo: this.combo_list });
+    }
+
+
+
+      );
+    /*
+        this.combo_list.forEach(c => {
+          console.log('Item:', c);
+        });
+        */
+
+    //this.navCtrl.push(OrderProducePage, { ordered_item: item, combo: this.combo_list });
   }
 
-  toTitleCase(str : string){
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  toTitleCase(str: string) {
+    return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
   }
 
   public getItems(ev: any) {
