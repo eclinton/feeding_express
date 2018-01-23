@@ -82,6 +82,7 @@ export class AddProducePage {
       this.item.date = humanize.time();
       this.item.estimatedLoadCost = 0;
       this.item.palletsOrderedCnt = 0;
+      this.item.pOnum = "none";
       if(this.infinite)
       {
          this.item.loadOffered = Number.MAX_VALUE;

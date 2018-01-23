@@ -22,11 +22,22 @@ import {AuthenticationService} from '../../services/AuthenticationService';
 })
 export class ConfirmOrderPage {
   item = {} as Produce;
+  private combo_list: Produce[];
   //private orders: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af_db: AngularFireDatabase, public alertCtrl: AlertController, private authService: AuthenticationService) {
-    this.item = navParams.data;
+    this.item = navParams.get("ordered_item");
+    this.combo_list = navParams.get("combo");
     //this.orders = af_db.list('/orders');
+    console.log("printing combo")
+    //this.combo_list.forEach(item => console.log(item.title));
+    /*
+    this.combo_list.subscribe(items =>{
+      items.forEach(item => {
+        console.log("item:", item)
+      })
+    })
+    */
 
   }
 
@@ -37,7 +48,7 @@ export class ConfirmOrderPage {
   save() {
     
     let self = this;
-    self.navCtrl.push(DeliveryDateAddressPage, self.item);
+    self.navCtrl.push(DeliveryDateAddressPage, {combo : self.combo_list});
     /*
     this.item.date = humanize.time();
 

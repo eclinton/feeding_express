@@ -15,6 +15,7 @@ import 'rxjs/add/operator/map';
 import * as humanize from 'humanize';
 import { User } from "../../models/user/user";
 import { AuthenticationService } from '../../services/AuthenticationService';
+import 'rxjs/add/operator/take';
 
 
 @Component({
@@ -118,6 +119,8 @@ export class ProduceList {
   public orderItem(item: any) {
     //this.item_ordered_plus_combo.push(item);
     console.log("clicked to order item")
+
+    let data: Produce[] = []
     
     this.combo_list = 
     this.af_db.list('/products',
@@ -130,10 +133,14 @@ export class ProduceList {
     )
      
     
-    this.combo_list.subscribe((combos: any) => {
-      console.log("testing")
+    this.combo_list.take(1).subscribe((combos) => {
+      console.log("testing!!!!!!!!!!")
      // this.products.forEach(c => { console.log("Item", c) })
-      this.navCtrl.push(OrderProducePage, { ordered_item: item, combo: this.combo_list });
+      combos.forEach(
+        item => {console.log(item.title); data.push(item)}
+      )
+      //console.log(data)
+      this.navCtrl.push(OrderProducePage, { ordered_item: item, combo: data });
     }
 
 

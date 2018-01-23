@@ -122,7 +122,7 @@
   </ion-card>
 -->
   <h5 ion-text> Products in this combo (testing phase): </h5>
-  <ion-card *ngFor="let combo of this.combo_list | async">
+  <ion-card *ngFor="let combo of this.combo_list ; let i = index;">
 
 
 
@@ -204,15 +204,15 @@
           <ion-badge item-end>{{combo.palletsOrderedCnt}}</ion-badge>
         </ion-list-header>
         <ion-item>
-          <ion-range min="0" max={{this.min(21,combo.loadOffered)}} step="1" [(ngModel)]="combo.palletsOrderedCnt">
+          <ion-range min="0" max={{this.min(21,combo.loadOffered)}} step="1" [(ngModel)]="combo.palletsOrderedCnt" name="test{{i}}">
             <ion-icon range-left>0</ion-icon>
             <ion-icon range-right>{{this.min(21,combo.loadOffered)}}</ion-icon>
           </ion-range>
         </ion-item>
         <ion-item>
 
-          <ion-label floating>Enter Purchase Order #</ion-label>
-          <ion-input type="text" [(ngModel)]="combo.pOnum"></ion-input>
+          <ion-label floating>Enter Purchase Order # {{i}}</ion-label>
+          <ion-input type="text" name="{{i}}" [(ngModel)]="combo.pOnum"  ></ion-input>
         </ion-item>
       </ion-list>
     </ion-card>

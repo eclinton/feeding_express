@@ -18,23 +18,23 @@
     <!--ion-list-header> Delivery Date </ion-list-header-->
     <ion-item>
       <ion-label> Delivery Date </ion-label>
-      <ion-datetime displayFormat="DDDD MMM D, YYYY" min="2017" [(ngModel)]="item.deliveryDate"></ion-datetime>
+      <ion-datetime displayFormat="DDDD MMM D, YYYY" min="2017" [(ngModel)]="this.order_details.deliveryDate"></ion-datetime>
     </ion-item>
     <ion-item text-wrap>
       <ion-label floating>Comments</ion-label>
-      <ion-textarea autoresize type="text" [(ngModel)]="item.addressComments"></ion-textarea>
+      <ion-textarea autoresize type="text" [(ngModel)]="this.order_details.addressComments"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating>City</ion-label>
-      <ion-input type="text" [(ngModel)]="item.city"></ion-input>
+      <ion-input type="text" [(ngModel)]="this.order_details.city"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>State</ion-label>
-      <ion-input type="text" [(ngModel)]="item.state"></ion-input>
+      <ion-input type="text" [(ngModel)]="this.order_details.state"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Zip Code</ion-label>
-      <ion-input type="text" [(ngModel)]="item.zipCode"></ion-input>
+      <ion-input type="text" [(ngModel)]="this.order_details.zipCode"></ion-input>
     </ion-item>
   </ion-list>
    <button ion-button full color="secondary" (click)="save()">

@@ -14,18 +14,18 @@
 
 
 <ion-content padding>
-  <ion-item>
+  <ion-item *ngFor="let itm of this.combo_list">
     <ion-card>
       <ion-list>
         <ion-list-header>
           <ion-avatar item-start small>
-            <img src="{{item.icon}}" width="60" height="60">
+            <img src="{{itm.icon}}" width="60" height="60">
           </ion-avatar>
-          {{item.title}}
+          {{itm.title}}
         </ion-list-header>
         <ion-item>
           Quantity:
-          <ion-badge item-end>{{item.palletsOrderedCnt}}</ion-badge>
+          <ion-badge item-end>{{itm.palletsOrderedCnt}}</ion-badge>
         </ion-item>
         <!--ion-item>
           Estimated Load Cost:
@@ -36,14 +36,21 @@
 
         <ion-item>
           Vendor Name:
-          <ion-badge item-end>{{item.vendorName}}</ion-badge>
+          <ion-badge item-end>{{itm.vendorName}}</ion-badge>
         </ion-item>
 
 
         <ion-item>
           Product cost:
-          <ion-badge item-end>{{item.costPerLb}}$/lb</ion-badge>
+          <ion-badge item-end>{{itm.costPerLb}}$/lb</ion-badge>
         </ion-item>
+
+        <ion-item>
+          PO# 
+          <ion-badge item-end>{{itm.pOnum}}</ion-badge>
+        </ion-item>
+
+        
 
 
       </ion-list>
@@ -52,7 +59,7 @@
       <ion-list>
         <ion-list-header>
           TOTAL (produce):
-          <ion-badge item-end>{{item.estimatedLoadCost}}$</ion-badge>
+          <ion-badge item-end>{{itm.estimatedLoadCost}}$</ion-badge>
         </ion-list-header>
         <ion-note small>
           *Truck delivery costs extra
