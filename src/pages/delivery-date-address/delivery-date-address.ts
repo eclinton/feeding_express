@@ -21,7 +21,7 @@ import 'rxjs/add/operator/take'
   templateUrl: 'delivery-date-address.html',
 })
 export class DeliveryDateAddressPage {
-  items_combo : Produce[];
+  items_combo: Produce[];
   order_details = {} as Produce;
   private orders: FirebaseListObservable<any[]>;
   private products: FirebaseListObservable<any[]>;
@@ -39,7 +39,7 @@ export class DeliveryDateAddressPage {
       entry.deliveryDate = new Date().toISOString();
 
     }
-    
+
 
     this.orders = af_db.list('/orders');
 
@@ -78,7 +78,7 @@ export class DeliveryDateAddressPage {
         if (((updated_item.loadOffered == 0) || (product.palletsOrderedCnt > updated_item.loadOffered))) {
           let alert = this.alertCtrl.create({
             title: 'Error',
-            subTitle: 'Not enough pallets available',
+            subTitle: 'Not enough pallets available for ' + product.title,
             buttons: ['OK']
           });
           alert.present();
@@ -113,15 +113,39 @@ export class DeliveryDateAddressPage {
     */
   }
 
-  save_to_db(new_item: any, order : Produce) {
+  save_to_db(new_item: any, order: Produce) {
     let self = this;
     order.date = humanize.time();
     order.deliveryDate = this.order_details.deliveryDate;
     order.addressComments = this.order_details.addressComments;
+    if (!order.addressComments) {
+      order.addressComments = ""
+    }
     order.city = this.order_details.city
     order.state = this.order_details.state
     order.zipCode = this.order_details.zipCode
     order.deliveryDate = new Date(order.deliveryDate).toDateString();
+    for (var property in order) {
+      //console.log("work!!!!")
+      if (order.hasOwnProperty(property)) {
+        if (order[property] == null) {
+          let alert = self.alertCtrl.create({
+            title: 'Error',
+            subTitle: "Missing input",
+            buttons: ['OK']
+          });
+
+
+          alert.present();
+          return
+
+
+        }
+        //console.log(property)
+        //console.log(order[property])
+
+      }
+    }
     let foo = (domain) => {
       for (let entry of this.fb.FBS) {
         if (domain == "@" + entry.domain) {

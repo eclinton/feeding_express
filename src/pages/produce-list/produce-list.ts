@@ -121,23 +121,37 @@ export class ProduceList {
     console.log("clicked to order item")
 
     let data: Produce[] = []
-    
-    this.combo_list = 
-    this.af_db.list('/products',
-      {
-        query: {
-          orderByChild: 'combo',
-          equalTo: item.combo
+
+    this.combo_list =
+      this.af_db.list('/products',
+        {
+          query: {
+            orderByChild: 'combo',
+            equalTo: item.combo
+          }
         }
-      }
-    )
-     
-    
+      )
+
+
     this.combo_list.take(1).subscribe((combos) => {
       console.log("testing!!!!!!!!!!")
-     // this.products.forEach(c => { console.log("Item", c) })
+      // this.products.forEach(c => { console.log("Item", c) })
       combos.forEach(
-        item => {console.log(item.title); data.push(item)}
+        i => {
+          console.log(item.title);
+          //i.addressComments = ""
+          if (item.combo >= 0) {
+            data.push(i)
+          }
+          else {
+            if(item.$key == i.$key)
+            {
+              data.push(i)
+            }
+
+          }
+
+        }
       )
       //console.log(data)
       this.navCtrl.push(OrderProducePage, { ordered_item: item, combo: data });
@@ -145,7 +159,7 @@ export class ProduceList {
 
 
 
-      );
+    );
     /*
         this.combo_list.forEach(c => {
           console.log('Item:', c);

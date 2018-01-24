@@ -52,6 +52,11 @@
               {{product.storage}}
             </ion-badge>
 
+            <ion-badge color="light" item-end *ngIf="product.combo>=0">
+              {{product.combo}}
+            </ion-badge>
+
+
             <!--ion-badge item-end-->
             <button ion-button round color="secondary" (click)="orderItem(product)" *ngIf="user.domain != '@feedingtexas.org'" item-end>
             <!--ion-item-->
