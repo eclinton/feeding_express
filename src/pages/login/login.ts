@@ -25,6 +25,7 @@ export class LoginPage {
     this.user.domain = this.user.email.replace(/.*@/, "");
     console.log(this.user.email)
     console.log(this.user.domain)
+
     if (this.fb.FBS.map(n => n.domain).indexOf(this.user.domain) == -1) {
       let alert = this.alertCtrl.create({
         title: 'Error',
@@ -36,6 +37,7 @@ export class LoginPage {
         return;
       }
     }
+    
     this.user.domain = "@" + this.user.domain
     if (!this.user.email || !this.user.password || !this.user.domain) {
       let alert = this.alertCtrl.create({
@@ -52,10 +54,10 @@ export class LoginPage {
     this.authService.getAuth().auth.signInWithEmailAndPassword(this.user.email, this.user.password).then(function (onResolve) {
       console.log("onResolve.");
       let user = self.authService.getAuth().auth.currentUser;
+      
       if (user.emailVerified || (self.user.email == "admin@feedingtexas.org") || (self.user.email == "admin@foodbank.org")) {
         self.appCtrl.getRootNav().setRoot(ProduceList, self.user);
         return;
-
       } else {
         let alert = self.alertCtrl.create({
           title: 'Error',
@@ -67,16 +69,51 @@ export class LoginPage {
 
 
       }
+      
+      
+    }, function (error) {
 
+      var errorCode = error.name;
+      var errorMessage = error.message;
 
+      if (errorMessage) {
+        let alert = self.alertCtrl.create({
+          title: 'Error',
+          subTitle: errorMessage,
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    });
+  }
 
+  forgotPassword() {
+    var self = this;
+    this.user.email = this.user.username;
+    console.log("test")
+    console.log(this.user.username)
+    if (!this.user.username) {
+      let alert = this.alertCtrl.create({
+        title: 'Error',
+        subTitle: "Incomplete input",
+        buttons: ['OK']
+      });
+      alert.present();
+      return;
+    }
+    this.authService.setDomain(this.user.domain);
+    this.authService.setUsername(this.user.username.split("@")[0])
+    this.authService.getAuth().auth.sendPasswordResetEmail(this.user.email).then(function (onResolve) {
+      console.log("onResolve.");
+      let user = self.authService.getAuth().auth.currentUser;
 
-
-
-
-
-
-
+      let alert = self.alertCtrl.create({
+        title: 'Reset',
+        subTitle: "Password Reset Email Sent",
+        buttons: ['OK']
+      });
+      alert.present();
+      return;
 
 
 
@@ -95,8 +132,6 @@ export class LoginPage {
       }
     });
   }
-
-  forgotPassword() { }
 
   signUp() {
     this.navCtrl.push(SignUpPage);
